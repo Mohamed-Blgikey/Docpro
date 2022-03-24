@@ -1,9 +1,10 @@
 <mat-toolbar color="primary">
   <a>DocPro <img src="../../assets/images/pages/heart-rate.png" width="25" height="25" alt=""></a>
-  <ng-container class="d-sm-none">
+  <ng-container >
     <button mat-button [matMenuTriggerFor]="userMenu">
-      <img width="30" height="30" class="profile-image-toolbar"
-        src="../../assets/images/pages/blood-pressure.png" />
+      <img width="30" height="30" class="rounded-circle"
+        [src]="imgPrefix+user.PhotoName" />
+        <span class="px-2">{{user.FullName}}</span>
       <mat-icon>expand_more</mat-icon>
     </button>
   </ng-container>
@@ -17,6 +18,10 @@
   </button>
 </mat-menu>
 
-<p>dashboard works!</p>
+
+
+
+<p class="d-none d-sm-block">dashboard works!</p>
+
 
 <router-outlet></router-outlet>

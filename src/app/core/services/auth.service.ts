@@ -28,12 +28,12 @@ export class AuthService {
   saveUserData(){
     let token:any = localStorage.getItem('userToken');
     this.user.next(jwtDecode(token))
-    console.log(this.user.getValue());
+    // console.log(this.user.getValue());
   }
 
   logOut(){
     this.user.next(null);
     localStorage.removeItem("userToken");
-    this._Router.navigate(['/login'])
+    this._Router.navigate(['/signin'])
   }
 }
