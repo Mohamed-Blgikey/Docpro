@@ -13,24 +13,28 @@ import { SigninComponent } from './authentication/signin/signin.component';
 import { SignupComponent } from './authentication/signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { SharedModule } from './shared/shared.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AdminComponent } from './dashboard/admin/admin.component';
+import { DoctorComponent } from './dashboard/doctor/doctor.component';
+import { PatientComponent } from './dashboard/patient/patient.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    DashboardComponent,
+    AdminComponent,
+    DoctorComponent,
+    PatientComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    HttpClientModule,
-    ReactiveFormsModule,
     HotToastModule.forRoot(),
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,6 +9,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 const materialModules = [
   MatButtonModule,
@@ -21,6 +23,8 @@ const materialModules = [
   MatButtonToggleModule,
   MatFormFieldModule,
   MatSlideToggleModule,
+  MatMenuModule,
+  MatToolbarModule
 ];
 
 @NgModule({

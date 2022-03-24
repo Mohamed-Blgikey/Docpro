@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from './material.module';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [],
   imports: [
@@ -11,6 +12,8 @@ import { MaterialModule } from './material.module';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   exports: [
     CommonModule,

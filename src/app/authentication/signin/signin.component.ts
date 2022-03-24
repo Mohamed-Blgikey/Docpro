@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -18,7 +19,7 @@ export class SigninComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
 
-  constructor(private auth: AuthService,private toast: HotToastService) {}
+  constructor(private auth: AuthService,private toast: HotToastService,private router:Router) {}
 
   ngOnInit(): void {}
 
@@ -38,6 +39,7 @@ export class SigninComponent implements OnInit {
         this.loading = false;
         localStorage.setItem('userToken', res.token);
         this.auth.saveUserData();
+        this.router.navigate(['/'])
       } else {
         this.loading = false;
         // console.log(res.message);

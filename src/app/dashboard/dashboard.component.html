@@ -1,0 +1,22 @@
+<mat-toolbar color="primary">
+  <a>DocPro <img src="../../assets/images/pages/heart-rate.png" width="25" height="25" alt=""></a>
+  <ng-container class="d-sm-none">
+    <button mat-button [matMenuTriggerFor]="userMenu">
+      <img width="30" height="30" class="profile-image-toolbar"
+        src="../../assets/images/pages/blood-pressure.png" />
+      <mat-icon>expand_more</mat-icon>
+    </button>
+  </ng-container>
+
+</mat-toolbar>
+
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item (click)="logOut()">
+    <mat-icon>logout</mat-icon>
+    Logout
+  </button>
+</mat-menu>
+
+<p>dashboard works!</p>
+
+<router-outlet></router-outlet>
