@@ -18,6 +18,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './dashboard/admin/admin.component';
 import { DoctorComponent } from './dashboard/doctor/doctor.component';
 import { PatientComponent } from './dashboard/patient/patient.component';
+import { AccesdeniedComponent } from './accesdenied/accesdenied.component';
+import { NotfoundedComponent } from './notfounded/notfounded.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { PatientComponent } from './dashboard/patient/patient.component';
     DashboardComponent,
     AdminComponent,
     DoctorComponent,
-    PatientComponent
+    PatientComponent,
+    AccesdeniedComponent,
+    NotfoundedComponent
   ],
   imports: [
     BrowserModule,

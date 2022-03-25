@@ -1,27 +1,115 @@
-<mat-toolbar color="primary">
-  <a>DocPro <img src="../../assets/images/pages/heart-rate.png" width="25" height="25" alt=""></a>
-  <ng-container >
-    <button mat-button [matMenuTriggerFor]="userMenu">
-      <img width="30" height="30" class="rounded-circle"
-        [src]="imgPrefix+user.PhotoName" />
-        <span class="px-2">{{user.FullName}}</span>
-      <mat-icon>expand_more</mat-icon>
+<div>
+  <mat-toolbar style=" background-image: linear-gradient(to right ,#3F51B5, #fff);" class="fixed-top">
+    <a style="color: white;">DocPro <img src="../../assets/images/pages/heart-rate.png" width="25" height="25" [alt]="user.FullName"></a>
+    <ng-container >
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        <img width="30" height="30" class="rounded-circle"
+          [src]="imgPrefix+user.PhotoName" />
+          <span class="px-2">{{user.FullName}}</span>
+        <mat-icon>expand_more</mat-icon>
+      </button>
+    </ng-container>
+
+
+
+  </mat-toolbar>
+
+  <mat-menu #userMenu="matMenu">
+    <button class="d-block d-sm-none" mat-menu-item >
+      <mat-icon>person</mat-icon>
+      Profile
     </button>
-  </ng-container>
+    <button mat-menu-item (click)="logOut()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
 
-</mat-toolbar>
+  </mat-menu>
 
-<mat-menu #userMenu="matMenu">
-  <button mat-menu-item (click)="logOut()">
-    <mat-icon>logout</mat-icon>
-    Logout
-  </button>
-</mat-menu>
+</div>
 
 
+<div class="row" style="position: relative;">
+  <div class="pt-5 col-sm-3 d-none d-sm-block" style=" height: 100vh; position: fixed; background-image: linear-gradient(to top , #fff,#3F51B5);" >
+    <!-- <p class="d-none d-sm-block">dashboard works!</p>
+     -->
+     <div class="user-prof pt-5 ">
+      <div class="user-img">
+        <div class="text-center">
+          <img class="w-50 rounded-circle" [src]="imgPrefix+user.PhotoName" [alt]="user.FullName">
+         </div>
+         <div class="w-50 bg-dark m-auto" style="text-align: right ; position: relative;">
+           <button style="position: absolute; bottom: 100%; right: 10px;" class="bImg" mat-mini-fab data-bs-toggle="modal" data-bs-target="#exampleModal">
+             <mat-icon>edit</mat-icon>
+           </button>
+         </div>
+      </div>
+
+      <div class="user info w-100  p-5" style="color: black !important; font-size:18px ;">
+        <p>Name :</p>
+          <div class="text-center pb-5">
+            {{user.FullName}}
+
+          </div>
+
+          <p >Email :</p>
+          <div class="text-center pb-5">
+            {{user.email}}
+
+          </div>
+
+          <p>Status :</p>
+          <div class="text-center pb-5 ">
+            {{user.Status}}
+
+          </div>
 
 
-<p class="d-none d-sm-block">dashboard works!</p>
+
+      </div>
+     </div>
+
+  </div>
+  <div class="col-sm-9 offset-sm-3 p-5">
+    <div class="pt-5">
+      <router-outlet></router-outlet>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
+
+    </div>
+    </div>
+</div>
 
 
-<router-outlet></router-outlet>

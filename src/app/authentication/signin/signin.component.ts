@@ -39,7 +39,16 @@ export class SigninComponent implements OnInit {
         this.loading = false;
         localStorage.setItem('userToken', res.token);
         this.auth.saveUserData();
-        this.router.navigate(['/'])
+        let user:any = this.auth.user.value;
+        if (user.Status == "Admin") {
+          this.router.navigate(['/dashboard/admin'])
+        }
+        if (user.Status == "Doctor") {
+          this.router.navigate(['/dashboard/doctor'])
+        }
+        if (user.Status == "Patient") {
+          this.router.navigate(['/dashboard/patient'])
+        }
       } else {
         this.loading = false;
         // console.log(res.message);
