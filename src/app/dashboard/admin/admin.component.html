@@ -1,1 +1,48 @@
-<p>admin works!</p>
+<div >
+  <div class="row list">
+    <div class="col-sm-2">
+      <a class="list-item rounded px-2 mb-1 mb-sm-0" style="text-decoration: none;" routerLink="doctors">
+        <span class="px-2 label">Docotrs</span> <span class="iconify icon" data-icon="fa6-solid:user-doctor"></span>
+      </a>
+    </div>
+
+    <div class="col-sm-2">
+      <a class="list-item rounded px-2 mb-1 mb-sm-0" style="text-decoration: none;" routerLink="patients" routerLinkActive="active">
+        <span class="px-2 label">Patients</span> <span class="iconify icon" data-icon="medical-icon:outpatient"></span>
+      </a>
+    </div>
+
+    <div class="col-sm-2">
+      <a class="list-item rounded px-2 mb-1 mb-sm-0" style="text-decoration: none;" routerLink="roles" routerLinkActive="active">
+        <span class="px-2 label">Roles</span> <span class="iconify icon" data-icon="eos-icons:cluster-role-binding"></span>
+      </a>
+    </div>
+
+    <div class="col-sm-2">
+      <a class="list-item rounded px-2 mb-1 mb-sm-0" style="text-decoration: none;" routerLink="sections" routerLinkActive="active">
+        <span class="px-2 label">Sections</span> <span class="iconify icon" data-icon="bx:category"></span>
+      </a>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="list-item rounded px-2 mb-1 mb-sm-0">
+        <span class="px-2 label">Requests</span> <span class="iconify icon" data-icon="carbon:media-cast"></span>
+        <!-- <span class="px-2 label">Requests</span>  <span class="iconify icon" ></span> -->
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="list-item rounded px-2 mb-1 mb-sm-0">
+        <span class="px-2 label">Sections</span> <span class="iconify icon" data-icon="bx:category"></span>
+        <!-- <span class="px-2 label">Requests</span>  <span class="iconify icon" ></span> -->
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<div class=" mt-sm-5">
+  <div [@routing]="outlet.isActivated?outlet.activatedRoute:''">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
+</div>

@@ -17,15 +17,7 @@ export class NotfoundedComponent implements OnInit {
   }
 
   navigate(){
-    if (this.user.Status == "Admin") {
-      this.router.navigate(['/dashboard/admin'])
-    }
-    if (this.user.Status == "Doctor") {
-      this.router.navigate(['/dashboard/doctor'])
-    }
-    if (this.user.Status == "Patient") {
-      this.router.navigate(['/dashboard/patient'])
-    }
+   this.auth.validRole();
   }
 
 }

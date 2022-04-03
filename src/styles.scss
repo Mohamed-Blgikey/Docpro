@@ -7,3 +7,81 @@ body { margin: 0; font-family: 'Roboto Slab', serif !important; }
   padding: 0;
   margin: 0;
 }
+
+
+
+.item{
+  overflow: hidden;
+  border-radius: 10px;
+  img{
+    transition: all 0.5s 0.5s ease-in;
+  }
+
+  .caption{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: all 0.5s;
+
+    h3{
+      position: relative;
+      left: 200%;
+      transition: left 0.5s 1.5s;
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    .delete,.edit{
+      font-size: 20px;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      position: relative;
+      left: 200%;
+      transition: left 0.5s 2s;
+      background-color:rgba(131, 171, 185, 0.6);
+
+
+    }
+
+    .delete{
+      &:hover{
+        color: red;
+        cursor: pointer;
+    }
+    }
+
+    .edit{
+      &:hover{
+        color: yellow;
+        cursor: pointer;
+    }
+    }
+
+
+  }
+
+  &:hover{
+      img{
+          transform: scale(1.2);
+      }
+      .caption{
+          opacity: 1;
+          transform: rotate(360deg);
+      }
+      p,h3,
+      .delete,
+      .edit{
+        left: 0px;
+    }
+  }
+
+}
+
+

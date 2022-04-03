@@ -1,0 +1,132 @@
+<h2 class="h1">Patients :</h2>
+<div class="row" style="justify-content: center;">
+  <div *ngFor="let user of patients" class="col-sm-3">
+
+    <div class="item position-relative my-3 text-center m-auto rounded" style="overflow: hidden; height: 250px;">
+
+        <img [src]="imgPrefix+user.photoName" class="w-100 h-100" [alt]="user.fullName">
+        <!-- <div class="vote">{{movie?.vote_average}}</div> -->
+        <div class="caption position-absolute">
+            <div class="py-2 text-center text-white h-100 " style="display: flex; justify-content: center; align-items: center;">
+             <div>
+              <h3 class="p-2 rounded">
+                <p>Email: {{user.email}} <br> Name: {{user.fullName}}</p>
+              </h3>
+              <div class="text-center ">
+                <button class="delete ms-auto me-3 mt-2 "
+                mat-mini-fab
+                data-bs-toggle="modal"
+            data-bs-target="#DeleteUser"
+            (click)="AccessDate(user)"
+              >
+                <span class="iconify" data-icon="fluent:delete-dismiss-20-filled"></span>
+              </button>
+             </div>
+             </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="patients?.length == 0" class="text-center text-danger" style="font-size: larger; font-weight: 800;">There are no patients at the moment</div>
+
+<!-- Edit UserInfo -->
+<div
+  class="modal fade"
+  id="DeleteUser"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Delete user !!
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="DeleteUserForm" (ngSubmit)="DeleteUser()">
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input readonly matInput formControlName="firstName" required />
+                <mat-icon matSuffix>face</mat-icon>
+                <mat-error
+                  *ngIf="DeleteUserForm.get('firstName')?.hasError('required')"
+                >
+                  First Name is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input readonly matInput formControlName="lastName" required />
+                <mat-icon matSuffix>face</mat-icon>
+                <mat-error
+                  *ngIf="DeleteUserForm.get('lastName')?.hasError('required')"
+                >
+                  Last Name is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input readonly
+                  matInput
+                  formControlName="email"
+                  required
+                />
+                <mat-icon matSuffix>mail</mat-icon>
+                <mat-error
+                  *ngIf="
+                  DeleteUserForm.get('email')?.hasError('required') ||
+                  DeleteUserForm.get('email')?.touched
+                  "
+                >
+                  Please enter a valid email address
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-danger"
+            [disabled]="DeleteUserForm.invalid"
+            data-bs-dismiss="modal"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

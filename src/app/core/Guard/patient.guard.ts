@@ -16,7 +16,7 @@ export class PatientGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (this.user.Status != "Patient") {
+      if (this.user.status != "Patient") {
         this.router.navigate(["/accessdenied"])
         return false;
       }

@@ -1,21 +1,32 @@
 <div>
-  <mat-toolbar style=" background-image: linear-gradient(to right ,#3F51B5, #fff);" class="fixed-top">
-    <a style="color: white;">DocPro <img src="../../assets/images/pages/heart-rate.png" width="25" height="25" [alt]="user.FullName"></a>
-    <ng-container >
+  <mat-toolbar
+    style="background-image: linear-gradient(to right, #3f51b5, #fff)"
+    class="fixed-top"
+  >
+    <a style="color: white"
+      >DocPro
+      <img
+        src="../../assets/images/pages/heart-rate.png"
+        width="25"
+        height="25"
+        [alt]="user.fullName"
+    /></a>
+    <ng-container>
       <button mat-button [matMenuTriggerFor]="userMenu">
-        <img width="30" height="30" class="rounded-circle"
-          [src]="imgPrefix+user.PhotoName" />
-          <span class="px-2">{{user.FullName}}</span>
+        <img
+          width="30"
+          height="30"
+          class="rounded-circle"
+          [src]="imgPrefix + user.photoName"
+        />
+        <span class="px-2">{{ user.fullName }}</span>
         <mat-icon>expand_more</mat-icon>
       </button>
     </ng-container>
-
-
-
   </mat-toolbar>
 
-  <mat-menu #userMenu="matMenu">
-    <button class="d-block d-sm-none" mat-menu-item >
+  <mat-menu #userMenu="matMenu" class="mt-3">
+    <button class="d-block d-sm-none" mat-menu-item>
       <mat-icon>person</mat-icon>
       Profile
     </button>
@@ -23,93 +34,244 @@
       <mat-icon>logout</mat-icon>
       Logout
     </button>
-
   </mat-menu>
-
 </div>
 
-
-<div class="row" style="position: relative;">
-  <div class="pt-5 col-sm-3 d-none d-sm-block" style=" height: 100vh; position: fixed; background-image: linear-gradient(to top , #fff,#3F51B5);" >
+<div class="row" style="position: relative">
+  <div
+    class="pt-5 col-sm-3 d-none d-sm-block"
+    style="
+      height: 100vh;
+      position: fixed;
+      background-image: linear-gradient(to top, #fff, #3f51b5);
+    "
+  >
     <!-- <p class="d-none d-sm-block">dashboard works!</p>
      -->
-     <div class="user-prof pt-5 ">
+    <div class="user-prof pt-5">
       <div class="user-img">
         <div class="text-center">
-          <img class="w-50 rounded-circle" [src]="imgPrefix+user.PhotoName" [alt]="user.FullName">
-         </div>
-         <div class="w-50 bg-dark m-auto" style="text-align: right ; position: relative;">
-           <button style="position: absolute; bottom: 100%; right: 10px;" class="bImg" mat-mini-fab data-bs-toggle="modal" data-bs-target="#exampleModal">
-             <mat-icon>edit</mat-icon>
-           </button>
-         </div>
+          <img
+            class="rounded-circle"
+            width="200px"
+            height="200px"
+            [src]="imgPrefix + user.photoName"
+            [alt]="user.fullName"
+          />
+        </div>
+        <div
+          class="w-50 bg-dark m-auto"
+          style="text-align: right; position: relative"
+        >
+          <button
+            style="position: absolute; bottom: 100%; right: 10px ;background-image: linear-gradient(to top, #fff, #42CBFC);"
+            class="bImg"
+            mat-mini-fab
+            data-bs-toggle="modal"
+            data-bs-target="#EditPhoto"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
       </div>
 
-      <div class="user info w-100  p-5" style="color: black !important; font-size:18px ;">
+      <div
+        class="user info w-100 p-5"
+        style="color: black !important; font-size: 18px"
+      >
         <p>Name :</p>
-          <div class="text-center pb-5">
-            {{user.FullName}}
+        <div class="pb-5">
+          <span class="pe-2">{{ user.fullName }}</span>
+          <span class="iconify" data-icon="carbon:user-avatar-filled"></span>
+        </div>
 
-          </div>
+        <p>Email :</p>
+        <div class="pb-5">
+          <span class="pe-2">{{ user.email }}</span>
+          <span class="iconify" data-icon="ic:round-email"></span>
+        </div>
 
-          <p >Email :</p>
-          <div class="text-center pb-5">
-            {{user.email}}
+        <p>Status :</p>
+        <div class="pb-5">
+          <span class="pe-2">{{ user.status }}</span
+          ><span
+            *ngIf="user.status == 'Admin'"
+            class="iconify"
+            data-icon="eos-icons:admin"
+          ></span>
+          <span
+            *ngIf="user.status == 'Patient'"
+            class="iconify"
+            data-icon="medical-icon:outpatient"
+          ></span>
+          <span
+            *ngIf="user.status == 'Doctor'"
+            class="iconify"
+            data-icon="healthicons:doctor-male-negative"
+          ></span>
+        </div>
 
-          </div>
-
-          <p>Status :</p>
-          <div class="text-center pb-5 ">
-            {{user.Status}}
-
-          </div>
-
-
-
+        <div>
+          <button
+            mat-button
+            style="background-image: linear-gradient(to top, #fff, #42CBFC, #42CBFC, #42CBFC);"
+            class="w-100 text-white rounded"
+            data-bs-toggle="modal"
+            data-bs-target="#EditUserInfo"
+          >
+            Edit
+          </button>
+        </div>
+        <div *ngIf="user.status ==  'Patient'">
+          <button
+            mat-button
+            style="background-image: linear-gradient(to top, #fff, #42CBFC, #42CBFC, #42CBFC);"
+            class="w-100 text-white rounded"
+          >
+            Be a doctor
+          </button>
+        </div>
       </div>
-     </div>
-
+    </div>
   </div>
-  <div class="col-sm-9 offset-sm-3 p-5">
+  <div class="col-sm-9 offset-sm-3 p-4">
     <div class="pt-5">
-      <router-outlet></router-outlet>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis neque aliquam maiores, nisi recusandae autem debitis quaerat facilis eaque eveniet et blanditiis provident, doloribus harum quam nulla eum modi minima.</p>
-
+      <div class="pt-4">
+        <router-outlet></router-outlet>
+      </div>
     </div>
-    </div>
+  </div>
 </div>
 
+<!-- Edit Photo -->
+<div
+  class="modal fade"
+  id="EditPhoto"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Your Photo</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <label>Image Profile</label>
+        <input
+          class="form-control"
+          accept="image/*"
+          type="file"
+          (change)="EditUserImage($event)"
+        />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- Edit UserInfo -->
+<div
+  class="modal fade"
+  id="EditUserInfo"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Edit Your Profile Info
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="EditUserInfo" (ngSubmit)="editUser()">
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" required />
+                <mat-icon matSuffix>face</mat-icon>
+                <mat-error
+                  *ngIf="EditUserInfo.get('firstName')?.hasError('required')"
+                >
+                  First Name is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" required />
+                <mat-icon matSuffix>face</mat-icon>
+                <mat-error
+                  *ngIf="EditUserInfo.get('lastName')?.hasError('required')"
+                >
+                  Last Name is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input
+                  (keyup)="clear()"
+                  matInput
+                  formControlName="email"
+                  required
+                />
+                <mat-icon matSuffix>mail</mat-icon>
+                <mat-error
+                  *ngIf="
+                    EditUserInfo.get('email')?.hasError('required') ||
+                    EditUserInfo.get('email')?.touched
+                  "
+                >
+                  Please enter a valid email address
+                </mat-error>
+              </mat-form-field>
+              <mat-error *ngIf="error">
+                {{ error }}
+              </mat-error>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="EditUserInfo.invalid"
+          >
+            Save changes
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -20,6 +20,11 @@ import { DoctorComponent } from './dashboard/doctor/doctor.component';
 import { PatientComponent } from './dashboard/patient/patient.component';
 import { AccesdeniedComponent } from './accesdenied/accesdenied.component';
 import { NotfoundedComponent } from './notfounded/notfounded.component';
+import { UserDetailResolver } from './core/resolvers/user.resolver';
+import { DoctorsComponent } from './dashboard/admin/doctors/doctors.component';
+import { PatientsComponent } from './dashboard/admin/patients/patients.component';
+import { RolesComponent } from './dashboard/admin/roles/roles.component';
+import { SectionComponent } from './dashboard/admin/section/section.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,11 @@ import { NotfoundedComponent } from './notfounded/notfounded.component';
     DoctorComponent,
     PatientComponent,
     AccesdeniedComponent,
-    NotfoundedComponent
+    NotfoundedComponent,
+    DoctorsComponent,
+    PatientsComponent,
+    RolesComponent,
+    SectionComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +49,7 @@ import { NotfoundedComponent } from './notfounded/notfounded.component';
     HotToastModule.forRoot(),
     SharedModule
   ],
-  providers: [],
+  providers: [UserDetailResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

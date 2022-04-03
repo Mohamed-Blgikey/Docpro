@@ -19,36 +19,21 @@ export class SigninComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
 
-  constructor(private auth: AuthService,private toast: HotToastService,private router:Router) {}
+  constructor(private auth: AuthService,private router:Router) {}
 
   ngOnInit(): void {}
 
   signin(data: FormGroup) {
     // console.log(data.value);
     this.auth.signin(data.value)
-    .pipe(
-      this.toast.observe({
-        success: 'Operation Done !',
-        loading: 'Logging in...',
-        error: ({ message }) => `There was an error: ${message} `,
-      })
-    ).subscribe((res) => {
+    .subscribe((res) => {
       this.loading = true;
       if (res.message == 'Success') {
         // console.log(res);
         this.loading = false;
         localStorage.setItem('userToken', res.token);
         this.auth.saveUserData();
-        let user:any = this.auth.user.value;
-        if (user.Status == "Admin") {
-          this.router.navigate(['/dashboard/admin'])
-        }
-        if (user.Status == "Doctor") {
-          this.router.navigate(['/dashboard/doctor'])
-        }
-        if (user.Status == "Patient") {
-          this.router.navigate(['/dashboard/patient'])
-        }
+        this.router.navigate(['/'])
       } else {
         this.loading = false;
         // console.log(res.message);

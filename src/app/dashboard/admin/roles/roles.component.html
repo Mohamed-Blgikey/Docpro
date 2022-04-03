@@ -1,0 +1,178 @@
+<h2 class="h1">Roles :</h2>
+
+<h3 class="h2">Doctor Role <span
+  class="iconify"
+  data-icon="healthicons:doctor-male-negative"
+  ></span></h3>
+  <div class="row" style="justify-content: center;">
+    <div *ngFor="let user of doctors" class="col-sm-3">
+
+      <div class="item position-relative my-3 text-center m-auto rounded" style="overflow: hidden; height: 250px;">
+
+          <img [src]="imgPrefix+user.photoName" class="w-100 h-100" [alt]="user.fullName">
+          <!-- <div class="vote">{{movie?.vote_average}}</div> -->
+          <div class="caption position-absolute">
+              <div class="py-2 text-center text-white h-100 " style="display: flex; justify-content: center; align-items: center;">
+               <div>
+                <h3 class="p-2 rounded">
+                  <p>Email: {{user.email}} <br> Name : {{user.fullName}}</p>
+                </h3>
+                <div class="text-center ">
+                  <button class="edit ms-auto me-3  mt-2 " (click)="AccessData(user)"
+                  mat-mini-fab
+                  data-bs-toggle="modal"
+                  data-bs-target="#EditUserRole"
+                >
+                  <span  class="iconify" data-icon="clarity:note-edit-solid"></span>
+                </button>
+                </div>
+
+               </div>
+              </div>
+
+
+
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="doctors?.length == 0" class="text-center text-danger" style="font-size: larger; font-weight: 800;">There are no doctors at the moment</div>
+
+
+
+
+
+<h3 class="h2">Patient Role <span
+  class="iconify"
+  data-icon="medical-icon:outpatient"
+  ></span></h3>
+  <div class="row" style="justify-content: center;">
+    <div *ngFor="let user of patients" class="col-sm-3">
+
+      <div class="item position-relative my-3 text-center m-auto rounded" style="overflow: hidden; height: 250px;">
+
+          <img [src]="imgPrefix+user.photoName" class="w-100 h-100" [alt]="user.fullName">
+          <!-- <div class="vote">{{movie?.vote_average}}</div> -->
+          <div class="caption position-absolute">
+              <div class="py-2 text-center text-white h-100 " style="display: flex; justify-content: center; align-items: center;">
+               <div>
+                <h3 class="p-2 rounded">
+                  <p>Email: {{user.email}} <br> Name : {{user.fullName}}</p>
+                </h3>
+                <div class="text-center ">
+                  <button class="edit ms-auto me-3 mt-2 " (click)="AccessData(user)"
+                  mat-mini-fab
+                  data-bs-toggle="modal"
+                  data-bs-target="#EditUserRole"
+                >
+                  <span  class="iconify" data-icon="clarity:note-edit-solid"></span>
+                </button>
+                </div>
+
+               </div>
+              </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="patients?.length == 0" class="text-center text-danger" style="font-size: larger; font-weight: 800;">There are no patients at the moment</div>
+
+
+
+
+
+
+
+  <!-- Edit UserRoles -->
+<div
+class="modal fade"
+id="EditUserRole"
+tabindex="-1"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">
+        Edit Your User Role
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="EditUserRole" (ngSubmit)="editUserRole()">
+        <div>
+          <div class="mb-2">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input (keyup)="error =''" readonly
+
+                matInput
+                formControlName="userName"
+                required
+              />
+              <mat-icon matSuffix>mail</mat-icon>
+              <mat-error
+                *ngIf="
+                EditUserRole.get('userName')?.hasError('required') ||
+                EditUserRole.get('userName')?.hasError('email') ||
+                EditUserRole.get('userName')?.touched
+                "
+              >
+                Please enter a valid email address
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div>
+          <div class="mb-2">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Roles</mat-label>
+              <mat-select (valueChange)="error = ''" formControlName="roleName">
+                <mat-option *ngFor="let role of roles" [value]="role.name">{{role.name}}</mat-option>
+              </mat-select>
+
+              <mat-icon matSuffix>face</mat-icon>
+              <mat-error
+                *ngIf="
+                EditUserRole.get('roleName')?.hasError('required') ||
+                EditUserRole.get('roleName')?.touched
+                "
+              >
+                Please enter a valid Role
+              </mat-error>
+            </mat-form-field>
+            <mat-error *ngIf="error">
+              {{ error }}
+            </mat-error>
+          </div>
+        </div>
+
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="EditUserRole.invalid"
+        >
+          Save changes
+        </button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+</div>

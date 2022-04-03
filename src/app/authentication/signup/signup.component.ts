@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit {
   },{validators:passwordsMatchValidator()});
 
 
-  constructor(private auth:AuthService,private router:Router,private toast: HotToastService) { }
+  constructor(private auth:AuthService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -56,13 +56,7 @@ export class SignupComponent implements OnInit {
     // console.log(dataSend);
 
     this.auth.signUp(dataSend)
-    .pipe(
-      this.toast.observe({
-        success: 'Operation Done !',
-        loading: 'Logging in...',
-        error: ({ message }) => `There was an error: ${message} `,
-      })
-    ).subscribe(res=>{
+    .subscribe(res=>{
       this.loading = true;
       if (res.message == "Success") {
         this.loading = false;
