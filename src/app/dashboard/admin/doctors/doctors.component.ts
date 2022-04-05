@@ -15,6 +15,9 @@ import { environment } from 'src/environments/environment';
 export class DoctorsComponent implements OnInit ,OnDestroy{
 
   private sub:Subscription|undefined;
+  private sub1:Subscription|undefined;
+  private sub2:Subscription|undefined;
+  private sub3:Subscription|undefined;
   doctors:any
   imgPrefix : string = environment.PhotoUrl;
 
@@ -36,14 +39,14 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
     })
 
     this.notify.hubConnection.on("NewUser",()=>{
-      this.sub = this.http.Get(User.GetPatients).subscribe(res=>{
+      this.sub2 = this.http.Get(User.GetPatients).subscribe(res=>{
         // console.log(res.data);
         this.doctors = res.data;
       })
     })
 
     this.notify.hubConnection.on("EditUser",()=>{
-      this.sub = this.http.Get(User.GetUsers).subscribe(res=>{
+      this.sub3 = this.http.Get(User.GetUsers).subscribe(res=>{
         // console.log(res.data);
         this.doctors = res.data;
       })
@@ -64,7 +67,7 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
 
   DeleteUser(){
     // console.log(this.DeleteUserF.value);
-    this.http.Post(`${User.DeleteUser}/${this.DeleteUserF.controls['id'].value}`)
+    this.sub1 = this.http.Post(`${User.DeleteUser}/${this.DeleteUserF.controls['id'].value}`)
     .pipe(
       this.toast.observe({
         success: 'Doctor deleted !',
@@ -80,6 +83,9 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
+    this.sub1?.unsubscribe();
+    this.sub2?.unsubscribe();
+    this.sub3?.unsubscribe();
   }
 
 }

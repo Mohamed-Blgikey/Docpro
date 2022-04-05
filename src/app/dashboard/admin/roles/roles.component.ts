@@ -16,7 +16,12 @@ export class RolesComponent implements OnInit ,OnDestroy{
 
 
   sub:Subscription|undefined;
+  sub1:Subscription|undefined;
   sub2:Subscription|undefined;
+  sub3:Subscription|undefined;
+  sub4:Subscription|undefined;
+  sub5:Subscription|undefined;
+
   users:any
   doctors:any;
   patients:any;
@@ -43,7 +48,7 @@ export class RolesComponent implements OnInit ,OnDestroy{
         return u.status.includes('Patient')
       })
 
-      this.sub2 = this.http.Get(User.GetRoles).subscribe(res=>{
+      this.sub1 = this.http.Get(User.GetRoles).subscribe(res=>{
         this.roles = res.data;
       })
 
@@ -51,7 +56,7 @@ export class RolesComponent implements OnInit ,OnDestroy{
 
 
     this.notify.hubConnection.on("EditUserRole",()=>{
-      this.sub = this.http.Get(User.GetUsers).subscribe(res=>{
+      this.sub2 = this.http.Get(User.GetUsers).subscribe(res=>{
         // console.log(res.data);
         this.users = res.data;
         this.doctors = this.users.filter((u:any)=>{
@@ -66,7 +71,7 @@ export class RolesComponent implements OnInit ,OnDestroy{
     })
 
     this.notify.hubConnection.on("EditUser",()=>{
-      this.sub = this.http.Get(User.GetUsers).subscribe(res=>{
+      this.sub3 = this.http.Get(User.GetUsers).subscribe(res=>{
         // console.log(res.data);
         this.users = res.data;
         this.doctors = this.users.filter((u:any)=>{
@@ -81,7 +86,7 @@ export class RolesComponent implements OnInit ,OnDestroy{
     })
 
     this.notify.hubConnection.on("NewUser",()=>{
-      this.sub = this.http.Get(User.GetUsers).subscribe(res=>{
+      this.sub4 = this.http.Get(User.GetUsers).subscribe(res=>{
         // console.log(res.data);
         this.users = res.data;
         this.doctors = this.users.filter((u:any)=>{
@@ -109,7 +114,7 @@ export class RolesComponent implements OnInit ,OnDestroy{
 
   editUserRole(){
     // console.log(this.EditUserInfo.value);
-    this.http.Post(User.AddInRole,this.EditUserRole.value).subscribe(res=>{
+    this.sub5 = this.http.Post(User.AddInRole,this.EditUserRole.value).subscribe(res=>{
       // console.log(res);
       if (res.error!=null) {
         this.error = res.error
@@ -121,7 +126,11 @@ export class RolesComponent implements OnInit ,OnDestroy{
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
+    this.sub1?.unsubscribe();
     this.sub2?.unsubscribe();
+    this.sub3?.unsubscribe();
+    this.sub4?.unsubscribe();
+    this.sub5?.unsubscribe();
   }
 
 }

@@ -1,0 +1,20 @@
+.card{
+  position: relative;
+  overflow: hidden;
+
+  .op{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: rgba($color: #000000, $alpha: 0.5);  position: absolute;
+    bottom: -100%;
+    transition: all 1s ease;
+  }
+
+
+  &:hover{
+    .op{
+      bottom:  0%;
+    }
+  }
+}

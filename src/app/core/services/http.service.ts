@@ -31,7 +31,10 @@ export class HttpService {
   }
 
   Delete(endPoint:string,body:any = null):Observable<any>{
-    return this.http.delete(this.fullPath(endPoint),body);
+     let token: any = localStorage.getItem('userToken');
+    let header = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+    return this.http.delete<any>(this.fullPath(endPoint),body);
   }
 
   Put (endPoint:string,body:any = null):Observable<any>{

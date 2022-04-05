@@ -8,5 +8,6 @@ export const User={
   DeleteUser:"/DeleteUser",
   AddInRole:"/AddInRole",
   SavePhoto:"/SavePhoto",
-  UnSavePhoto:"/UnSavePhoto"
+  UnSavePhoto:"/UnSavePhoto",
+  UplaodPhoto:"/UplaodPhoto"
 }
