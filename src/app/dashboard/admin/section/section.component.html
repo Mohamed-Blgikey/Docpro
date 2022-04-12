@@ -1,10 +1,12 @@
 <h2 class="h1 my-2">Sections :</h2>
+<hr>
+
 
 <button mat-raised-button color="primary" data-bs-toggle="modal"
 data-bs-target="#AddSection"> Add</button>
 
 <div class="mt-5">
-  <div class="row" style="justify-content: center;">
+  <div class="row">
     <div *ngFor="let section of sections" class="col-sm-3">
      <div class="mb-2">
       <div class="card">
@@ -18,18 +20,15 @@ data-bs-target="#AddSection"> Add</button>
         <div class="op py-2">
           <button data-bs-toggle="modal"  data-bs-target="#EditSection" (click)="AccessDataEdit(section)" mat-raised-button class="bg-warning">Edit <span class="iconify" data-icon="akar-icons:edit"></span></button>
           <button data-bs-toggle="modal"  data-bs-target="#DeleteSection" (click)="AccessData(section)"  mat-raised-button class="bg-danger ms-1">Delete <span class="iconify" data-icon="fluent:delete-dismiss-28-regular"></span></button>
-
         </div>
       </div>
      </div>
-      <!-- <div class="card">
-        <h1></h1>
-        <h1>{{section.photoName}}</h1>
-        <h2>{{section.doctors.length}}</h2>
-      </div> -->
     </div>
   </div>
 </div>
+
+<div *ngIf="sections?.length == 0" class="text-center alert alert-danger" >There are no sections at the moment</div>
+
 
 
 

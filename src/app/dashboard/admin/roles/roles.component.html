@@ -1,10 +1,11 @@
 <h2 class="h1">Roles :</h2>
-
+<hr>
 <h3 class="h2">Doctor Role <span
   class="iconify"
   data-icon="healthicons:doctor-male-negative"
   ></span></h3>
-  <div class="row" style="justify-content: center;">
+  <hr>
+  <div class="row">
     <div *ngFor="let user of doctors" class="col-sm-3">
 
       <div class="item position-relative my-3 text-center m-auto rounded" style="overflow: hidden; height: 250px;">
@@ -38,7 +39,7 @@
     </div>
   </div>
 
-  <div *ngIf="doctors?.length == 0" class="text-center text-danger" style="font-size: larger; font-weight: 800;">There are no doctors at the moment</div>
+  <div *ngIf="doctors?.length == 0" class="text-center alert alert-danger">There are no doctors at the moment</div>
 
 
 
@@ -48,7 +49,8 @@
   class="iconify"
   data-icon="medical-icon:outpatient"
   ></span></h3>
-  <div class="row" style="justify-content: center;">
+  <hr>
+  <div class="row" >
     <div *ngFor="let user of patients" class="col-sm-3">
 
       <div class="item position-relative my-3 text-center m-auto rounded" style="overflow: hidden; height: 250px;">
@@ -78,7 +80,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="patients?.length == 0" class="text-center text-danger" style="font-size: larger; font-weight: 800;">There are no patients at the moment</div>
+  <div *ngIf="patients?.length == 0" class="text-center alert alert-danger">There are no patients at the moment</div>
 
 
 

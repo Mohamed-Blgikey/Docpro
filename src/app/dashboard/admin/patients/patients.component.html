@@ -1,5 +1,6 @@
 <h2 class="h1">Patients :</h2>
-<div class="row" style="justify-content: center;">
+<hr>
+<div class="row" >
   <div *ngFor="let user of patients" class="col-sm-3">
 
     <div class="item position-relative my-3 text-center m-auto rounded" style="overflow: hidden; height: 250px;">
@@ -33,7 +34,7 @@
   </div>
 </div>
 
-<div *ngIf="patients?.length == 0" class="text-center text-danger" style="font-size: larger; font-weight: 800;">There are no patients at the moment</div>
+<div *ngIf="patients?.length == 0" class="text-center alert alert-danger">There are no patients at the moment</div>
 
 <!-- Edit UserInfo -->
 <div

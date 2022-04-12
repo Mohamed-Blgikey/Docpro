@@ -14,7 +14,7 @@ body { margin: 0; font-family: 'Roboto Slab', serif !important; }
   overflow: hidden;
   border-radius: 10px;
   img{
-    transition: all 0.5s 0.5s ease-in;
+    transition: all 0.5s 0.1s ease-in;
   }
 
   .caption{
@@ -29,7 +29,7 @@ body { margin: 0; font-family: 'Roboto Slab', serif !important; }
     h3{
       position: relative;
       left: 200%;
-      transition: left 0.5s 1.5s;
+      transition: left 0.1s 0.2s;
       background-color: rgba(0,0,0,0.2);
     }
 
@@ -44,7 +44,7 @@ body { margin: 0; font-family: 'Roboto Slab', serif !important; }
       height: 40px;
       position: relative;
       left: 200%;
-      transition: left 0.5s 2s;
+      transition: left 0.1s 0.3s;
       background-color:rgba(131, 171, 185, 0.6);
 
 
@@ -73,7 +73,6 @@ body { margin: 0; font-family: 'Roboto Slab', serif !important; }
       }
       .caption{
           opacity: 1;
-          transform: rotate(360deg);
       }
       p,h3,
       .delete,
