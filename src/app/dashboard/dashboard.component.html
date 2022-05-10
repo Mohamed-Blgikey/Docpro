@@ -122,9 +122,12 @@
             Edit
           </button>
         </div>
-        <div *ngIf="user.status ==  'Patient'">
+        <div *ngIf="user.status ==  'Patient' && user.degree == null && show">
           <button
+            (click)="MakeRequestForm.controls['patientId'].setValue(user.id)"
             mat-button
+            data-bs-toggle="modal"
+                data-bs-target="#BeDoctor"
             style="background-image: linear-gradient(to top, #fff, #42CBFC, #42CBFC, #42CBFC);"
             class="w-100 text-white rounded"
           >
@@ -264,6 +267,81 @@
             [disabled]="EditUserInfo.invalid"
           >
             Save changes
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- BeDoctor -->
+<div
+  class="modal fade"
+  id="BeDoctor"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Be a doctor !!
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="MakeRequestForm" (ngSubmit)="makeRequest()">
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Degree</mat-label>
+                <input formControlName="degree"  matInput required />
+                <mat-icon matSuffix><span class="iconify" data-icon="icon-park-outline:degree-hat"></span></mat-icon>
+                <mat-error>
+                  Your Degree is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Descraption</mat-label>
+                <textarea formControlName ="descraption" matInput required ></textarea>
+                <mat-icon matSuffix><span class="iconify" data-icon="fluent:book-information-20-regular"></span></mat-icon>
+                <mat-error>
+                  Your Descraption is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <input formControlName="patientId" hidden  type="text">
+
+
+
+          <button
+            [disabled]="MakeRequestForm.invalid"
+            type="submit"
+            class="btn btn-success"
+            data-bs-dismiss="modal"
+          >
+            Request
           </button>
         </form>
       </div>

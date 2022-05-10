@@ -64,7 +64,7 @@
 <div class="row" >
   <div *ngFor="let user of freeDoctors" class="col-sm-3">
 
-    <div class="item position-relative my-3 text-center m-auto rounded" style="overflow: hidden; height: 250px;">
+    <div class="item position-relative my-3 text-center m-auto rounded shadow" style="overflow: hidden; height: 250px;">
 
         <img [src]="imgPrefix+user.photoName" class="w-100 h-100" [alt]="user.fullName">
         <!-- <div class="vote">{{movie?.vote_average}}</div> -->
@@ -72,7 +72,7 @@
             <div class="py-2 text-center text-white h-100 " style="display: flex; justify-content: center; align-items: center;">
              <div>
               <h3 class="p-2 rounded">
-                <p>Email: {{user.email}} <br> Name : {{user.fullName}}</p>
+                <p>Email: {{user.email}} <br> Name: {{user.fullName}} <br> Degree: {{user.degree}}</p>
               </h3>
               <div class="text-center ">
                 <button class="delete ms-auto me-3  mt-2 "
@@ -107,7 +107,7 @@
     <div class="alert alert-danger text-center" *ngIf="section.doctors.length == 0">There were no doctor in this section</div>
     <div class="row">
       <div class="col-sm-3" *ngFor="let doctor of section.doctors">
-        <div class="item position-relative my-3 text-center m-auto rounded" style="overflow: hidden; height: 250px;">
+        <div class="item position-relative my-3 text-center m-auto rounded shadow" style="overflow: hidden; height: 250px;">
 
           <img [src]="imgPrefix+doctor.photoName" class="w-100 h-100" [alt]="doctor.fullName">
           <!-- <div class="vote">{{movie?.vote_average}}</div> -->

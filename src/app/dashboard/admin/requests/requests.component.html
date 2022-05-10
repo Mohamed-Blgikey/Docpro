@@ -1,0 +1,32 @@
+<h2 class="h1">Requests :</h2>
+<hr>
+<div class="row">
+  <div class="col-12 mb-5" *ngFor="let request of requests">
+    <div class="w-50 mx-auto shadow">
+      <mat-card class="example-card">
+        <p>{{request?.['created']|date:'long'}}</p>
+        <mat-card-title-group>
+          <mat-card-title>{{request['patient']?.['fullName']}}</mat-card-title>
+          <mat-card-subtitle>
+           {{request?.['degree']}}
+          </mat-card-subtitle>
+          <img mat-card-lg-image [src]="imgPrefix+request['patient']?.['photoName']" >
+        </mat-card-title-group>
+        <mat-card-content>
+          {{request?.['descraption']}}
+        </mat-card-content>
+        <section>
+          <div style="text-align: right;">
+            <button class="mx-1" mat-raised-button color="primary" (click)="RequestAction(request,1)">Accept</button>
+            <button class="mx-1" mat-raised-button color="warn" (click)="RequestAction(request,0)">Refuse</button>
+          </div>
+        </section>
+      </mat-card>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div *ngIf="requests?.length == 0" class="text-center alert alert-danger">There are no requests at the moment</div>

@@ -6,4 +6,5 @@ export interface user {
   email:string;
   nameid?:string;
   roles?:string;
+  Degree?:string
 }

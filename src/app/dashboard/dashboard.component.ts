@@ -8,6 +8,8 @@ import * as signalr from '@aspnet/signalr'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { NotifyService } from '../core/services/notify.service';
+import { HttpService } from '../core/services/http.service';
+import { Patient } from '../core/APIS/Patient';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -18,6 +20,7 @@ export class DashboardComponent implements OnInit,OnDestroy {
   user:any;
   error:string = '';
   imgPrefix:string = environment.PhotoUrl;
+  show:boolean = true;
 
   EditUserInfo:FormGroup = new FormGroup({
       id: new FormControl('',[Validators.required]),
@@ -26,8 +29,14 @@ export class DashboardComponent implements OnInit,OnDestroy {
       lastName:new FormControl('',[Validators.required]),
   })
 
+  MakeRequestForm:FormGroup = new FormGroup({
+    degree:new FormControl('',[Validators.required]),
+    descraption:new FormControl('',[Validators.required]),
+    patientId:new FormControl('',[Validators.required]),
+})
 
-  constructor(private authService:AuthService,private userService:UserService,private route:ActivatedRoute,private notify:NotifyService) {  }
+
+  constructor(private authService:AuthService,private userService:UserService,private route:ActivatedRoute,private notify:NotifyService,private http:HttpService,private toast:HotToastService) {  }
 
 
   ngOnInit(): void {
@@ -107,6 +116,22 @@ export class DashboardComponent implements OnInit,OnDestroy {
     this.error = '';
   }
 
+
+
+  makeRequest(){
+    this.show = false;
+    this.http.Post(Patient.MakeRequest,this.MakeRequestForm.value)
+    .pipe(
+      this.toast.observe({
+        success: 'Request Done !',
+        loading: 'Request in...',
+        error: ( message:any ) => `There was an error: ${message} `,
+      })
+    )
+    .subscribe(res=>{
+
+    })
+  }
 
   ngOnDestroy(): void {
     this.notify.stopConnection();

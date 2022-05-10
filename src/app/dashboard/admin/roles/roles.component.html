@@ -8,7 +8,7 @@
   <div class="row">
     <div *ngFor="let user of doctors" class="col-sm-3">
 
-      <div class="item position-relative my-3 text-center m-auto rounded" style="overflow: hidden; height: 250px;">
+      <div class="item position-relative my-3 text-center m-auto rounded  shadow" style="overflow: hidden; height: 250px;">
 
           <img [src]="imgPrefix+user.photoName" class="w-100 h-100" [alt]="user.fullName">
           <!-- <div class="vote">{{movie?.vote_average}}</div> -->
@@ -53,7 +53,7 @@
   <div class="row" >
     <div *ngFor="let user of patients" class="col-sm-3">
 
-      <div class="item position-relative my-3 text-center m-auto rounded" style="overflow: hidden; height: 250px;">
+      <div class="item position-relative my-3 text-center m-auto rounded shadow" style="overflow: hidden; height: 250px;">
 
           <img [src]="imgPrefix+user.photoName" class="w-100 h-100" [alt]="user.fullName">
           <!-- <div class="vote">{{movie?.vote_average}}</div> -->
@@ -138,22 +138,21 @@ aria-hidden="true"
 
         <div>
           <div class="mb-2">
-            <mat-form-field class="w-100" appearance="outline">
-              <mat-label>Roles</mat-label>
-              <mat-select (valueChange)="error = ''" formControlName="roleName">
-                <mat-option *ngFor="let role of roles" [value]="role.name">{{role.name}}</mat-option>
-              </mat-select>
-
-              <mat-icon matSuffix>face</mat-icon>
+            <div class="form-group">
+              <label>Roles</label>
+              <select class="form-control"  formControlName="roleName" (valueChange)="error = ''">
+                <option *ngFor="let role of roles" [value]="role.name">{{role.name}}</option>
+              </select>
               <mat-error
                 *ngIf="
-                EditUserRole.get('roleName')?.hasError('required') ||
-                EditUserRole.get('roleName')?.touched
+                EditUserRole.get('roleName')?.hasError('required')
                 "
               >
                 Please enter a valid Role
               </mat-error>
-            </mat-form-field>
+
+            </div>
+
             <mat-error *ngIf="error">
               {{ error }}
             </mat-error>

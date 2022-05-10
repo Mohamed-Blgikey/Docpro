@@ -12,6 +12,7 @@ import { UserDetailResolver } from './core/resolvers/user.resolver';
 import { AdminComponent } from './dashboard/admin/admin.component';
 import { DoctorsComponent } from './dashboard/admin/doctors/doctors.component';
 import { PatientsComponent } from './dashboard/admin/patients/patients.component';
+import { RequestsComponent } from './dashboard/admin/requests/requests.component';
 import { RolesComponent } from './dashboard/admin/roles/roles.component';
 import { SectionComponent } from './dashboard/admin/section/section.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -70,6 +71,10 @@ const routes: Routes = [
           {
             path:'sections',
             component:SectionComponent
+          },
+          {
+            path:'requests',
+            component:RequestsComponent
           }
         ]
       },

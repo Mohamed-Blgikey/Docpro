@@ -25,6 +25,7 @@ import { DoctorsComponent } from './dashboard/admin/doctors/doctors.component';
 import { PatientsComponent } from './dashboard/admin/patients/patients.component';
 import { RolesComponent } from './dashboard/admin/roles/roles.component';
 import { SectionComponent } from './dashboard/admin/section/section.component';
+import { RequestsComponent } from './dashboard/admin/requests/requests.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SectionComponent } from './dashboard/admin/section/section.component';
     DoctorsComponent,
     PatientsComponent,
     RolesComponent,
-    SectionComponent
+    SectionComponent,
+    RequestsComponent
   ],
   imports: [
     BrowserModule,

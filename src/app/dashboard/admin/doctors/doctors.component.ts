@@ -25,6 +25,7 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
   private sub5:Subscription|undefined;
   private sub6:Subscription|undefined;
   private sub7:Subscription|undefined;
+  private sub8:Subscription|undefined;
   doctors:any;
   freeDoctors:any;
   sections:any;
@@ -63,6 +64,17 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
         // console.log(res.data);
         this.doctors = res.data;
       })
+      this.sub8 = this.http.Get(Admin.GetDoctors).subscribe(res=>{
+        // console.log(res.data);
+        this.doctors = res.data
+        this.freeDoctors = this.doctors.filter((m:any)=>{
+          return m.sectionId == 0;
+        })
+        // console.log(this.freeDoctors);
+
+      })
+
+
     })
 
 

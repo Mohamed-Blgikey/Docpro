@@ -3,9 +3,19 @@ export const Admin={
   GetDoctors:"/GetDoctors",
   GetSections:"/GetSections",
   GetSection:"/GetSection",
+  GetRequests:"/getRequests",
+
+
   AddSection:"/AddSection",
-  EditSection:"/EditSection",
-  DeleteSection:"/DeleteSection",
   addDoctorToSection:"/addDoctorToSection",
-  RemoveAllDoctorsFromSection:"/RemoveAllDoctorsFromSection/"
+
+
+
+  EditSection:"/EditSection",
+
+
+
+  DeleteSection:"/DeleteSection",
+  RemoveAllDoctorsFromSection:"/RemoveAllDoctorsFromSection/",
+  DeleteRequest:"/DeleteRequest"
 }
