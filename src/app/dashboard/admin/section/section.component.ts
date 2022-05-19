@@ -20,16 +20,16 @@ export class SectionComponent implements OnInit, OnDestroy {
   fileName: string = '';
   fileNameEdit: string = '';
 
-  sub:Subscription|undefined;
-  sub1:Subscription|undefined;
-  sub2:Subscription|undefined;
-  sub3:Subscription|undefined;
-  sub4:Subscription|undefined;
-  sub5:Subscription|undefined;
-  sub6:Subscription|undefined;
-  sub7:Subscription|undefined;
-  sub8:Subscription|undefined;
-  sub9:Subscription|undefined;
+  sub: Subscription | undefined;
+  sub1: Subscription | undefined;
+  sub2: Subscription | undefined;
+  sub3: Subscription | undefined;
+  sub4: Subscription | undefined;
+  sub5: Subscription | undefined;
+  sub6: Subscription | undefined;
+  sub7: Subscription | undefined;
+  sub8: Subscription | undefined;
+  sub9: Subscription | undefined;
 
   AddSectionForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -165,9 +165,11 @@ export class SectionComponent implements OnInit, OnDestroy {
               userId: this.auth.user['_value'].nameid,
               name: this.DeleteAndEditSectionForm.controls['photoName'].value,
             };
-            this.sub7 = this.http.Post(User.UnSavePhoto, photo).subscribe((res) => {
-              // console.log(res);
-            });
+            this.sub7 = this.http
+              .Post(User.UnSavePhoto, photo)
+              .subscribe((res) => {
+                // console.log(res);
+              });
           });
       });
   }

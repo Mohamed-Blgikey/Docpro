@@ -9,56 +9,60 @@ import jwtDecode from 'jwt-decode';
 import { HotToastService } from '@ngneat/hot-toast';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-  user:BehaviorSubject<any> = new BehaviorSubject(null);
-  constructor(private _Router:Router,private http:HttpClient,private toast: HotToastService,private router:Router) {
+  user: BehaviorSubject<any> = new BehaviorSubject(null);
+  constructor(
+    private _Router: Router,
+    private http: HttpClient,
+    private toast: HotToastService,
+    private router: Router
+  ) {
     if (localStorage.getItem('userToken')) {
       this.saveUserData();
     }
   }
-  signin(obj:any):Observable<any>{
-    return this.http.post(environment.baseUrl+Auth.login,obj).pipe(
+  signin(obj: any): Observable<any> {
+    return this.http.post(environment.baseUrl + Auth.login, obj).pipe(
       this.toast.observe({
         success: 'Operation Done !',
         loading: 'Logging in...',
-        error: ( message ) => `There was an error: ${message.message} `,
+        error: (message) => `There was an error: ${message.message} `,
       })
-    )
+    );
   }
 
-  signUp(obj:any):Observable<any>{
-    return this.http.post(environment.baseUrl+Auth.Register,obj).pipe(
+  signUp(obj: any): Observable<any> {
+    return this.http.post(environment.baseUrl + Auth.Register, obj).pipe(
       this.toast.observe({
         success: 'Operation Done !',
         loading: 'Signing-UP in...',
-        error: ( message ) => `There was an error: ${message.message} `,
+        error: (message) => `There was an error: ${message.message} `,
       })
-    )
+    );
   }
-  saveUserData(){
-    let token:any = localStorage.getItem('userToken');
-    this.user.next(jwtDecode(token))
-    // console.log(this.user.getValue());
-  }
-
-  validRole(){
-    if (this.user['_value'].status == "Admin") {
-      this.router.navigate(['/dashboard/admin'])
-    }
-    if (this.user['_value'].status == "Doctor") {
-      this.router.navigate(['/dashboard/doctor'])
-    }
-    if (this.user['_value'].status == "Patient") {
-      this.router.navigate(['/dashboard/patient'])
-    }
+  saveUserData() {
+    let token: any = localStorage.getItem('userToken');
+    this.user.next(jwtDecode(token));
+    // console.log(token);
   }
 
-  logOut(){
+  validRole() {
+    if (this.user['_value'].status == 'Admin') {
+      this.router.navigate(['/dashboard/admin']);
+    }
+    if (this.user['_value'].status == 'Doctor') {
+      this.router.navigate(['/dashboard/doctor']);
+    }
+    if (this.user['_value'].status == 'Patient') {
+      this.router.navigate(['/dashboard/patient']);
+    }
+  }
+
+  logOut() {
     this.user.next(null);
-    localStorage.removeItem("userToken");
-    this._Router.navigate(['/signin'])
+    localStorage.removeItem('userToken');
+    this._Router.navigate(['/signin']);
   }
 }

@@ -1,0 +1,242 @@
+<h2 class="h1 my-2">Posts :</h2>
+<hr />
+
+<button
+  data-bs-toggle="modal"
+  data-bs-target="#AddPost"
+  mat-flat-button
+  class="bg-success text-white"
+>
+  Add Post
+</button>
+<div class="alert alert-danger text-center mt-3" *ngIf="posts?.length == 0">
+  You have not posted any topics yet
+</div>
+
+<div *ngFor="let post of posts">
+  <div class="mb-5">
+    <mat-card style="max-width: 400px" class="m-auto">
+      <mat-card-header>
+        <div mat-card-avatar style="overflow: hidden">
+          <img
+            class="w-100 h-100"
+            [src]="imgPrefix + post.doctor.photoName"
+            [alt]="post.doctor.fullName"
+          />
+        </div>
+        <mat-card-title>
+          <div style="display: flex; justify-content: space-between">
+            <p>{{ post.doctor.fullName }}</p>
+            <div>
+              <button
+                data-bs-toggle="modal"
+                data-bs-target="#DeletePost"
+                data-bs-dismiss="modal"
+                (click)="DeletedData(post)"
+                class="btn pt-0"
+              >
+                <span
+                  class="iconify"
+                  data-icon="fluent:delete-dismiss-28-filled"
+                ></span>
+              </button>
+              <button
+                data-bs-toggle="modal"
+                data-bs-target="#EditPost"
+                class="btn pt-0"
+              >
+                <span
+                  class="iconify"
+                  data-icon="clarity:note-edit-solid"
+                ></span>
+              </button>
+            </div>
+          </div>
+        </mat-card-title>
+        <mat-card-subtitle
+          >{{ post.date | date: "long" }}<br />
+          {{ post.topic }}</mat-card-subtitle
+        >
+      </mat-card-header>
+      <img
+        mat-card-image
+        [src]="imgPrefix + post.photoName"
+        [alt]="post.catpion"
+      />
+      <mat-card-content>
+        <p>
+          {{ post.catpion }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<!-- DeletePost -->
+<div
+  class="modal fade"
+  id="DeletePost"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete post !!</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="DeletePostFrom" (ngSubmit)="Delete()">
+          <p style="color: red">Delete Post !!</p>
+          <input hidden formControlName="id" type="text" />
+          <input hidden formControlName="topic" type="text" />
+          <input hidden formControlName="catpion" type="text" />
+          <input hidden formControlName="photoName" type="text" />
+          <input hidden formControlName="doctorId" type="text" />
+          <button data-bs-dismiss="modal" class="btn btn-outline-danger">
+            Delete
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AddPost -->
+<div
+  class="modal fade"
+  id="AddPost"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Post !!</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="AddPostForm" (ngSubmit)="AddPost()">
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Topic</mat-label>
+                <input matInput formControlName="topic" />
+                <mat-error
+                  *ngIf="AddPostForm.get('topic')?.hasError('required')"
+                >
+                  Topic is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Caption</mat-label>
+                <input matInput formControlName="catpion" required />
+                <mat-error
+                  *ngIf="AddPostForm.get('catpion')?.hasError('required')"
+                >
+                  Caption is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div
+            class="m-auto"
+            style="width: 200px; height: 200px"
+            *ngIf="fileName"
+          >
+            <img class="w-100 h-100" [src]="imgPrefix + fileName" alt="" />
+          </div>
+
+          <div>
+            <div class="mb-2">
+              <label for="Photo">Photo</label>
+              <input
+                id="Photo"
+                class="form-control"
+                type="file"
+                (change)="uploadPhoto($event)"
+              />
+            </div>
+          </div>
+
+          <div>
+            <div class="mb-2">
+              <input hidden matInput formControlName="photoName" />
+            </div>
+          </div>
+
+          <div>
+            <div class="mb-2">
+              <input hidden matInput formControlName="doctorId" />
+            </div>
+          </div>
+
+          <button
+            mat-raised-button
+            class="bg-success text-white"
+            [disabled]="AddPostForm.invalid"
+          >
+            Add
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EditPost -->
+<div
+  class="modal fade"
+  id="EditPost"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Post !!</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

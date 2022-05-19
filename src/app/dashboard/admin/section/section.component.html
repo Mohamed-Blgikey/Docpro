@@ -1,36 +1,75 @@
 <h2 class="h1 my-2">Sections :</h2>
-<hr>
+<hr />
 
-
-<button mat-raised-button color="primary" data-bs-toggle="modal"
-data-bs-target="#AddSection"> Add</button>
+<button
+  mat-raised-button
+  color="primary"
+  data-bs-toggle="modal"
+  data-bs-target="#AddSection"
+>
+  Add
+</button>
 
 <div class="mt-5">
   <div class="row">
     <div *ngFor="let section of sections" class="col-sm-3">
-     <div class="mb-2  shadow">
-      <div class="card">
-        <img style="height: 200px;" [src]="imgPrefix+ section.photoName" class="card-img-top" alt="...">
-        <div class="card-body" >
-          <h2 class="h1 card-text" style="display: flex; justify-content: space-between; align-items: center;">
-            <div>{{section.name}}</div>
-            <div style="font-size: 16px;"><span class="iconify" data-icon="mdi:doctor"></span> {{section.doctors.length}}</div>
-          </h2>
-        </div>
-        <div class="op py-2">
-          <button data-bs-toggle="modal"  data-bs-target="#EditSection" (click)="AccessDataEdit(section)" mat-raised-button class="bg-warning">Edit <span class="iconify" data-icon="akar-icons:edit"></span></button>
-          <button data-bs-toggle="modal"  data-bs-target="#DeleteSection" (click)="AccessData(section)"  mat-raised-button class="bg-danger ms-1">Delete <span class="iconify" data-icon="fluent:delete-dismiss-28-regular"></span></button>
+      <div class="mb-2 shadow">
+        <div class="card">
+          <img
+            style="height: 200px"
+            [src]="imgPrefix + section.photoName"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h2
+              class="h1 card-text"
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <div>{{ section.name }}</div>
+              <div style="font-size: 16px">
+                <span class="iconify" data-icon="mdi:doctor"></span>
+                {{ section.doctors.length }}
+              </div>
+            </h2>
+          </div>
+          <div class="op py-2">
+            <button
+              data-bs-toggle="modal"
+              data-bs-target="#EditSection"
+              (click)="AccessDataEdit(section)"
+              mat-raised-button
+              class="bg-warning"
+            >
+              Edit <span class="iconify" data-icon="akar-icons:edit"></span>
+            </button>
+            <button
+              data-bs-toggle="modal"
+              data-bs-target="#DeleteSection"
+              (click)="AccessData(section)"
+              mat-raised-button
+              class="bg-danger ms-1"
+            >
+              Delete
+              <span
+                class="iconify"
+                data-icon="fluent:delete-dismiss-28-regular"
+              ></span>
+            </button>
+          </div>
         </div>
       </div>
-     </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="sections?.length == 0" class="text-center alert alert-danger" >There are no sections at the moment</div>
-
-
-
+<div *ngIf="sections?.length == 0" class="text-center alert alert-danger">
+  There are no sections at the moment
+</div>
 
 <!-- Add Section -->
 <div
@@ -43,9 +82,7 @@ data-bs-target="#AddSection"> Add</button>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          Add Section !!
-        </h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Section !!</h5>
         <button
           type="button"
           class="btn-close"
@@ -54,14 +91,18 @@ data-bs-target="#AddSection"> Add</button>
         ></button>
       </div>
       <div class="modal-body">
-
         <form [formGroup]="AddSectionForm" (ngSubmit)="AddSection()">
           <div>
             <div class="mb-2">
               <mat-form-field class="w-100" appearance="outline">
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name" required />
-                <mat-icon matSuffix><span class="iconify" data-icon="openmoji:european-name-badge"></span></mat-icon>
+                <mat-icon matSuffix
+                  ><span
+                    class="iconify"
+                    data-icon="openmoji:european-name-badge"
+                  ></span
+                ></mat-icon>
                 <mat-error
                   *ngIf="AddSectionForm.get('name')?.hasError('required')"
                 >
@@ -74,13 +115,22 @@ data-bs-target="#AddSection"> Add</button>
           <div>
             <div class="mb-2">
               <label for="Photo">Photo</label>
-                <input id="Photo" class="form-control" type="file" (change)="uploadPhoto($event)" />
-
+              <input
+                id="Photo"
+                class="form-control"
+                type="file"
+                (change)="uploadPhoto($event)"
+              />
             </div>
           </div>
 
-
-          <button mat-raised-button class="bg-success text-white" [disabled]="AddSectionForm.invalid">Add</button>
+          <button
+            mat-raised-button
+            class="bg-success text-white"
+            [disabled]="AddSectionForm.invalid"
+          >
+            Add
+          </button>
         </form>
       </div>
       <div class="modal-footer">
@@ -91,7 +141,6 @@ data-bs-target="#AddSection"> Add</button>
     </div>
   </div>
 </div>
-
 
 <!-- Edit Section -->
 <div
@@ -104,9 +153,7 @@ data-bs-target="#AddSection"> Add</button>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          Edit Section !!
-        </h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Section !!</h5>
         <button
           type="button"
           class="btn-close"
@@ -115,14 +162,18 @@ data-bs-target="#AddSection"> Add</button>
         ></button>
       </div>
       <div class="modal-body">
-
         <form [formGroup]="DeleteAndEditSectionForm" (ngSubmit)="EDitSection()">
           <div>
             <div class="mb-2">
               <mat-form-field class="w-100" appearance="outline">
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name" required />
-                <mat-icon matSuffix><span class="iconify" data-icon="openmoji:european-name-badge"></span></mat-icon>
+                <mat-icon matSuffix
+                  ><span
+                    class="iconify"
+                    data-icon="openmoji:european-name-badge"
+                  ></span
+                ></mat-icon>
                 <mat-error
                   *ngIf="AddSectionForm.get('name')?.hasError('required')"
                 >
@@ -135,12 +186,23 @@ data-bs-target="#AddSection"> Add</button>
           <div>
             <div class="mb-2">
               <label for="Photo">Photo</label>
-                <input id="Photo" class="form-control" type="file" (change)="uploadPhoto($event)" />
-
+              <input
+                id="Photo"
+                class="form-control"
+                type="file"
+                (change)="uploadPhoto($event)"
+              />
             </div>
           </div>
 
-          <button mat-raised-button class="bg-warning text-white" data-bs-dismiss="modal" [disabled]="DeleteAndEditSectionForm.invalid">Edit</button>
+          <button
+            mat-raised-button
+            class="bg-warning text-white"
+            data-bs-dismiss="modal"
+            [disabled]="DeleteAndEditSectionForm.invalid"
+          >
+            Edit
+          </button>
         </form>
       </div>
       <div class="modal-footer">
@@ -163,9 +225,7 @@ data-bs-target="#AddSection"> Add</button>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          Delete Section !!
-        </h5>
+        <h5 class="modal-title" id="exampleModalLabel">Delete Section !!</h5>
         <button
           type="button"
           class="btn-close"
@@ -175,14 +235,26 @@ data-bs-target="#AddSection"> Add</button>
       </div>
 
       <div class="modal-footer">
-        <form [formGroup]="DeleteAndEditSectionForm" (ngSubmit)="DeleteSection()">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button mat-raised-button class="bg-danger text-white ms-2" data-bs-dismiss="modal">Delete</button>
-      </form>
-        </div>
+        <form
+          [formGroup]="DeleteAndEditSectionForm"
+          (ngSubmit)="DeleteSection()"
+        >
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            mat-raised-button
+            class="bg-danger text-white ms-2"
+            data-bs-dismiss="modal"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
-

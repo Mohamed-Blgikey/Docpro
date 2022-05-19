@@ -4,10 +4,11 @@ export const Admin={
   GetSections:"/GetSections",
   GetSection:"/GetSection",
   GetRequests:"/getRequests",
-
+  GetRoles:"/GetRoles",
 
   AddSection:"/AddSection",
   addDoctorToSection:"/addDoctorToSection",
+  AddInRole:"/AddInRole",
 
 
 
@@ -15,6 +16,7 @@ export const Admin={
 
 
 
+  DeleteUser:"/DeleteUser",
   DeleteSection:"/DeleteSection",
   RemoveAllDoctorsFromSection:"/RemoveAllDoctorsFromSection/",
   DeleteRequest:"/DeleteRequest"

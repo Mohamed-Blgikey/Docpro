@@ -47,6 +47,7 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
 
 
   ngOnInit(): void {
+
     this.sub = this.http.Get(Admin.GetDoctors).subscribe(res=>{
       // console.log(res.data);
       this.doctors = res.data
@@ -54,34 +55,13 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
         return m.sectionId == 0;
       })
       // console.log(this.freeDoctors);
-
     })
-
-
-
-    this.notify.hubConnection.on("EditUser",()=>{
-      this.sub3 = this.http.Get(Admin.GetUsers).subscribe(res=>{
-        // console.log(res.data);
-        this.doctors = res.data;
-      })
-      this.sub8 = this.http.Get(Admin.GetDoctors).subscribe(res=>{
-        // console.log(res.data);
-        this.doctors = res.data
-        this.freeDoctors = this.doctors.filter((m:any)=>{
-          return m.sectionId == 0;
-        })
-        // console.log(this.freeDoctors);
-
-      })
-
-
-    })
-
 
     this.sub4 = this.http.Get(Admin.GetSections).subscribe((res) => {
       // console.log(res.data) ;
       this.sections = res.data;
     });
+
 
     this.notify.hubConnection.on('AddSection', () => {
       this.sub5 = this.http.Get(Admin.GetSections).subscribe((res) => {
@@ -90,14 +70,31 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
       });
     });
 
-    this.notify.hubConnection.on('doctorChange', () => {
+
+    this.notify.hubConnection.on('EditDoctor', () => {
 
       this.sub7 = this.http.Get(Admin.GetSections).subscribe((res) => {
         // console.log(res.data) ;
         this.sections = res.data;
       });
 
-      this.sub3 = this.http.Get(Admin.GetUsers).subscribe(res=>{
+      this.sub3 = this.http.Get(Admin.GetDoctors).subscribe(res=>{
+        // console.log(res.data);
+        this.doctors = res.data;
+        this.freeDoctors = this.doctors.filter((m:any)=>{
+          return m.sectionId == 0;
+        })
+      })
+    });
+
+    this.notify.hubConnection.on('DeleteDoctor', () => {
+
+      this.sub7 = this.http.Get(Admin.GetSections).subscribe((res) => {
+        console.log(res.data) ;
+        this.sections = res.data;
+      });
+
+      this.sub3 = this.http.Get(Admin.GetDoctors).subscribe(res=>{
         // console.log(res.data);
         this.doctors = res.data;
         this.freeDoctors = this.doctors.filter((m:any)=>{
@@ -112,15 +109,14 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
   changeDoctor(){
     // console.log(this.changeDoctorForm.value);
     this.sub6 = this.http.Post(Admin.addDoctorToSection,this.changeDoctorForm.value)
-    .pipe(
-      this.toast.observe({
-        success: 'Doctor Changed !',
-        loading: 'Changing in...',
-        error: ( message:any) => `There was an error: ${message} `,
-      })
-    )
     .subscribe(res=>{
       // console.log(res);
+      if (res.error != null) {
+        this.toast.error(res.error)
+      }
+      else{
+        this.toast.success("Doctor Changed !")
+      }
     })
   }
 
@@ -138,7 +134,7 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
 
   DeleteUser(){
     // console.log(this.DeleteUserF.value);
-    this.sub1 = this.http.Post(`${User.DeleteUser}/${this.DeleteUserF.controls['id'].value}`)
+    this.sub1 = this.http.Post(`${Admin.DeleteUser}/${this.DeleteUserF.controls['id'].value}`)
     .pipe(
       this.toast.observe({
         success: 'Doctor deleted !',

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Subscription } from 'rxjs';
+import { Admin } from 'src/app/core/APIS/Admin';
 import { User } from 'src/app/core/APIS/User';
 import { HttpService } from 'src/app/core/services/http.service';
 import { NotifyService } from 'src/app/core/services/notify.service';
@@ -65,7 +66,7 @@ export class PatientsComponent implements OnInit ,OnDestroy{
   }
   DeleteUser(){
     // console.log(this.DeleteUserForm.value);
-    this.sub3 = this.http.Post(`${User.DeleteUser}/${this.DeleteUserForm.controls['id'].value}`)
+    this.sub3 = this.http.Post(`${Admin.DeleteUser}/${this.DeleteUserForm.controls['id'].value}`)
     .pipe(
       this.toast.observe({
         success: 'Patient deleted !',

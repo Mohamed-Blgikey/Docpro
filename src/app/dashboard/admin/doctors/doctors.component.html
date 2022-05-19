@@ -1,50 +1,51 @@
 <h2 class="h1">Doctors :</h2>
-<hr>
+<hr />
 
 <form [formGroup]="changeDoctorForm" (ngSubmit)="changeDoctor()">
   <div class="row">
     <div class="col-sm-3">
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Email</mat-label>
-        <input list="UserEmails"
+        <input
+          list="UserEmails"
           matInput
           required
           formControlName="email"
           autocomplete="off"
         />
         <datalist id="UserEmails">
-          <option *ngFor="let doctor of doctors">{{doctor.email}}</option>
+          <option *ngFor="let doctor of doctors">{{ doctor.email }}</option>
         </datalist>
         <mat-icon matSuffix>mail</mat-icon>
         <mat-error
           *ngIf="
-          changeDoctorForm.get('email')?.hasError('required') ||
-          changeDoctorForm.get('email')?.touched
+            changeDoctorForm.get('email')?.hasError('required') ||
+            changeDoctorForm.get('email')?.touched
           "
         >
           Please enter a valid email address
         </mat-error>
       </mat-form-field>
-
     </div>
 
     <div class="mx-2 col-sm-3">
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Section</mat-label>
         <mat-select formControlName="sectionId">
-          <mat-option *ngFor="let section of sections" [value]="section.id">{{section.name}}</mat-option>
+          <mat-option *ngFor="let section of sections" [value]="section.id">{{
+            section.name
+          }}</mat-option>
         </mat-select>
         <mat-icon matSuffix>card_travel</mat-icon>
         <mat-error
           *ngIf="
-          changeDoctorForm.get('sectionId')?.hasError('required') ||
-          changeDoctorForm.get('sectionId')?.touched
+            changeDoctorForm.get('sectionId')?.hasError('required') ||
+            changeDoctorForm.get('sectionId')?.touched
           "
         >
           Please enter a valid section
         </mat-error>
       </mat-form-field>
-
     </div>
   </div>
 
@@ -58,86 +59,126 @@
   </button>
 </form>
 
-
 <h3>Free Doctors :</h3>
-<div class="alert alert-danger text-center" *ngIf="freeDoctors?.length == 0">All doctors work</div>
-<div class="row" >
+<div class="alert alert-danger text-center" *ngIf="freeDoctors?.length == 0">
+  All doctors work
+</div>
+<div class="row">
   <div *ngFor="let user of freeDoctors" class="col-sm-3">
-
-    <div class="item position-relative my-3 text-center m-auto rounded shadow" style="overflow: hidden; height: 250px;">
-
-        <img [src]="imgPrefix+user.photoName" class="w-100 h-100" [alt]="user.fullName">
-        <!-- <div class="vote">{{movie?.vote_average}}</div> -->
-        <div class="caption position-absolute">
-            <div class="py-2 text-center text-white h-100 " style="display: flex; justify-content: center; align-items: center;">
-             <div>
-              <h3 class="p-2 rounded">
-                <p>Email: {{user.email}} <br> Name: {{user.fullName}} <br> Degree: {{user.degree}}</p>
-              </h3>
-              <div class="text-center ">
-                <button class="delete ms-auto me-3  mt-2 "
+    <div
+      class="item position-relative my-3 text-center m-auto rounded shadow"
+      style="overflow: hidden; height: 250px"
+    >
+      <img
+        [src]="imgPrefix + user.photoName"
+        class="w-100 h-100"
+        [alt]="user.fullName"
+      />
+      <!-- <div class="vote">{{movie?.vote_average}}</div> -->
+      <div class="caption position-absolute">
+        <div
+          class="py-2 text-center text-white h-100"
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <div>
+            <h3 class="p-2 rounded">
+              <p>
+                Email: {{ user.email }} <br />
+                Name: {{ user.fullName }} <br />
+                <span *ngIf="user.degree">Degree: {{ user.degree }}</span>
+              </p>
+            </h3>
+            <div class="text-center">
+              <button
+                class="delete ms-auto me-3 mt-2"
                 mat-mini-fab
                 data-bs-toggle="modal"
                 data-bs-target="#DeleteDoctor"
                 (click)="AccessDeletedDate(user)"
               >
-                <span class="iconify" data-icon="fluent:delete-dismiss-20-filled"></span>
+                <span
+                  class="iconify"
+                  data-icon="fluent:delete-dismiss-20-filled"
+                ></span>
               </button>
-             </div>
-
-             </div>
             </div>
-
-
-
+          </div>
         </div>
-
+      </div>
     </div>
   </div>
 </div>
 
-<hr>
+<hr />
 <div>
   <div class="section" *ngFor="let section of sections">
     <h3>
-      <img [src]="imgPrefix+section.photoName" style="border-radius: 50%;" width="30px" height="30px" alt=""> :
-      {{section.name}}
+      <img
+        [src]="imgPrefix + section.photoName"
+        style="border-radius: 50%"
+        width="30px"
+        height="30px"
+        alt=""
+      />
+      :
+      {{ section.name }}
     </h3>
 
-    <div class="alert alert-danger text-center" *ngIf="section.doctors.length == 0">There were no doctor in this section</div>
+    <div
+      class="alert alert-danger text-center"
+      *ngIf="section.doctors.length == 0"
+    >
+      There were no doctor in this section
+    </div>
     <div class="row">
       <div class="col-sm-3" *ngFor="let doctor of section.doctors">
-        <div class="item position-relative my-3 text-center m-auto rounded shadow" style="overflow: hidden; height: 250px;">
-
-          <img [src]="imgPrefix+doctor.photoName" class="w-100 h-100" [alt]="doctor.fullName">
+        <div
+          class="item position-relative my-3 text-center m-auto rounded shadow"
+          style="overflow: hidden; height: 250px"
+        >
+          <img
+            [src]="imgPrefix + doctor.photoName"
+            class="w-100 h-100"
+            [alt]="doctor.fullName"
+          />
           <!-- <div class="vote">{{movie?.vote_average}}</div> -->
           <div class="caption position-absolute">
-              <div class="py-2 text-center text-white h-100 " style="display: flex; justify-content: center; align-items: center;">
-               <div>
+            <div
+              class="py-2 text-center text-white h-100"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <div>
                 <h3 class="p-2 rounded">
-                  <p>Email: {{doctor.email}} <br> Name: {{doctor.fullName}}</p>
+                  <p>
+                    Email: {{ doctor.email }} <br />
+                    Name: {{ doctor.fullName }}
+                  </p>
                 </h3>
-                <div class="text-center ">
-                  <button class="delete ms-auto me-3  mt-2 "
-                  mat-mini-fab
-                  data-bs-toggle="modal"
-                  data-bs-target="#DeleteDoctor"
-                  (click)="AccessDeletedDate(doctor)"
-                >
-                  <span class="iconify" data-icon="fluent:delete-dismiss-20-filled"></span>
-                </button>
-               </div>
-               </div>
+                <div class="text-center">
+                  <button
+                    class="delete ms-auto me-3 mt-2"
+                    mat-mini-fab
+                    data-bs-toggle="modal"
+                    data-bs-target="#DeleteDoctor"
+                    (click)="AccessDeletedDate(doctor)"
+                  >
+                    <span
+                      class="iconify"
+                      data-icon="fluent:delete-dismiss-20-filled"
+                    ></span>
+                  </button>
+                </div>
               </div>
-
-
-
+            </div>
           </div>
-
-      </div>
+        </div>
       </div>
     </div>
-    <hr>
+    <hr />
   </div>
 </div>
 
@@ -152,9 +193,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          Delete Doctor !!
-        </h5>
+        <h5 class="modal-title" id="exampleModalLabel">Delete Doctor !!</h5>
         <button
           type="button"
           class="btn-close"
@@ -198,22 +237,17 @@
             <div class="mb-2">
               <mat-form-field class="w-100" appearance="outline">
                 <mat-label>Email</mat-label>
-                <input readonly
-                  matInput
-                  formControlName="email"
-                  required
-                />
+                <input readonly matInput formControlName="email" required />
                 <mat-icon matSuffix>mail</mat-icon>
                 <mat-error
                   *ngIf="
-                  DeleteUserF.get('email')?.hasError('required') ||
-                  DeleteUserF.get('email')?.touched
+                    DeleteUserF.get('email')?.hasError('required') ||
+                    DeleteUserF.get('email')?.touched
                   "
                 >
                   Please enter a valid email address
                 </mat-error>
               </mat-form-field>
-
             </div>
           </div>
 
@@ -235,4 +269,3 @@
     </div>
   </div>
 </div>
-

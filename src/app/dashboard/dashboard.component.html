@@ -64,7 +64,12 @@
           style="text-align: right; position: relative"
         >
           <button
-            style="position: absolute; bottom: 100%; right: 10px ;background-image: linear-gradient(to top, #fff, #42CBFC);"
+            style="
+              position: absolute;
+              bottom: 100%;
+              right: 10px;
+              background-image: linear-gradient(to top, #fff, #42cbfc);
+            "
             class="bImg"
             mat-mini-fab
             data-bs-toggle="modal"
@@ -79,22 +84,24 @@
         class="user info w-100 p-5"
         style="color: black !important; font-size: 18px"
       >
-        <p>Name :</p>
+        <p style="display: flex; align-items: center">
+          <span class="iconify" data-icon="carbon:user-avatar-filled"></span>
+          Name :
+        </p>
         <div class="pb-5">
           <span class="pe-2">{{ user.fullName }}</span>
-          <span class="iconify" data-icon="carbon:user-avatar-filled"></span>
         </div>
 
-        <p>Email :</p>
+        <p style="display: flex; align-items: center">
+          <span class="iconify" data-icon="ic:round-email"></span>
+          Email :
+        </p>
         <div class="pb-5">
           <span class="pe-2">{{ user.email }}</span>
-          <span class="iconify" data-icon="ic:round-email"></span>
         </div>
 
-        <p>Status :</p>
-        <div class="pb-5">
-          <span class="pe-2">{{ user.status }}</span
-          ><span
+        <p style="display: flex; align-items: center">
+          <span
             *ngIf="user.status == 'Admin'"
             class="iconify"
             data-icon="eos-icons:admin"
@@ -109,12 +116,24 @@
             class="iconify"
             data-icon="healthicons:doctor-male-negative"
           ></span>
+          Status :
+        </p>
+        <div class="pb-5">
+          <span class="pe-2">{{ user.status }}</span>
         </div>
 
         <div>
           <button
             mat-button
-            style="background-image: linear-gradient(to top, #fff, #42CBFC, #42CBFC, #42CBFC);"
+            style="
+              background-image: linear-gradient(
+                to top,
+                #fff,
+                #42cbfc,
+                #42cbfc,
+                #42cbfc
+              );
+            "
             class="w-100 text-white rounded"
             data-bs-toggle="modal"
             data-bs-target="#EditUserInfo"
@@ -122,13 +141,21 @@
             Edit
           </button>
         </div>
-        <div *ngIf="user.status ==  'Patient' && user.degree == null && show">
+        <div *ngIf="user.status == 'Patient' && user.degree == null && show">
           <button
             (click)="MakeRequestForm.controls['patientId'].setValue(user.id)"
             mat-button
             data-bs-toggle="modal"
-                data-bs-target="#BeDoctor"
-            style="background-image: linear-gradient(to top, #fff, #42CBFC, #42CBFC, #42CBFC);"
+            data-bs-target="#BeDoctor"
+            style="
+              background-image: linear-gradient(
+                to top,
+                #fff,
+                #42cbfc,
+                #42cbfc,
+                #42cbfc
+              );
+            "
             class="w-100 text-white rounded"
           >
             Be a doctor
@@ -279,9 +306,6 @@
   </div>
 </div>
 
-
-
-
 <!-- BeDoctor -->
 <div
   class="modal fade"
@@ -293,9 +317,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          Be a doctor !!
-        </h5>
+        <h5 class="modal-title" id="exampleModalLabel">Be a doctor !!</h5>
         <button
           type="button"
           class="btn-close"
@@ -309,31 +331,38 @@
             <div class="mb-2">
               <mat-form-field class="w-100" appearance="outline">
                 <mat-label>Degree</mat-label>
-                <input formControlName="degree"  matInput required />
-                <mat-icon matSuffix><span class="iconify" data-icon="icon-park-outline:degree-hat"></span></mat-icon>
-                <mat-error>
-                  Your Degree is required
-                </mat-error>
+                <input formControlName="degree" matInput required />
+                <mat-icon matSuffix
+                  ><span
+                    class="iconify"
+                    data-icon="icon-park-outline:degree-hat"
+                  ></span
+                ></mat-icon>
+                <mat-error> Your Degree is required </mat-error>
               </mat-form-field>
             </div>
           </div>
-
 
           <div>
             <div class="mb-2">
               <mat-form-field class="w-100" appearance="outline">
                 <mat-label>Descraption</mat-label>
-                <textarea formControlName ="descraption" matInput required ></textarea>
-                <mat-icon matSuffix><span class="iconify" data-icon="fluent:book-information-20-regular"></span></mat-icon>
-                <mat-error>
-                  Your Descraption is required
-                </mat-error>
+                <textarea
+                  formControlName="descraption"
+                  matInput
+                  required
+                ></textarea>
+                <mat-icon matSuffix
+                  ><span
+                    class="iconify"
+                    data-icon="fluent:book-information-20-regular"
+                  ></span
+                ></mat-icon>
+                <mat-error> Your Descraption is required </mat-error>
               </mat-form-field>
             </div>
           </div>
-          <input formControlName="patientId" hidden  type="text">
-
-
+          <input formControlName="patientId" hidden type="text" />
 
           <button
             [disabled]="MakeRequestForm.invalid"

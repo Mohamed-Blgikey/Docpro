@@ -26,6 +26,9 @@ import { PatientsComponent } from './dashboard/admin/patients/patients.component
 import { RolesComponent } from './dashboard/admin/roles/roles.component';
 import { SectionComponent } from './dashboard/admin/section/section.component';
 import { RequestsComponent } from './dashboard/admin/requests/requests.component';
+import { DoctorpostsComponent } from './dashboard/doctor/doctorposts/doctorposts.component';
+import { PostsComponent } from './dashboard/admin/posts/posts.component';
+import { ReservationsComponent } from './dashboard/doctor/reservations/reservations.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { RequestsComponent } from './dashboard/admin/requests/requests.component
     PatientsComponent,
     RolesComponent,
     SectionComponent,
-    RequestsComponent
+    RequestsComponent,
+    DoctorpostsComponent,
+    PostsComponent,
+    ReservationsComponent
   ],
   imports: [
     BrowserModule,

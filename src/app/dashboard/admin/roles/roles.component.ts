@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HotToastService } from '@ngneat/hot-toast';
 import { Subscription } from 'rxjs';
+import { Admin } from 'src/app/core/APIS/Admin';
 import { User } from 'src/app/core/APIS/User';
 import { HttpService } from 'src/app/core/services/http.service';
 import { NotifyService } from 'src/app/core/services/notify.service';
@@ -34,7 +36,7 @@ export class RolesComponent implements OnInit ,OnDestroy{
 
   imgPrefix : string = environment.PhotoUrl;
 
-  constructor(private http:HttpService,private notify:NotifyService,private userService:UserService) { }
+  constructor(private http:HttpService,private notify:NotifyService,private toast:HotToastService) { }
 
   ngOnInit(): void {
     this.sub = this.http.Get(User.GetUsers).subscribe(res=>{
@@ -48,7 +50,7 @@ export class RolesComponent implements OnInit ,OnDestroy{
         return u.status.includes('Patient')
       })
 
-      this.sub1 = this.http.Get(User.GetRoles).subscribe(res=>{
+      this.sub1 = this.http.Get(Admin.GetRoles).subscribe(res=>{
         this.roles = res.data;
       })
 
@@ -114,10 +116,14 @@ export class RolesComponent implements OnInit ,OnDestroy{
 
   editUserRole(){
     // console.log(this.EditUserInfo.value);
-    this.sub5 = this.http.Post(User.AddInRole,this.EditUserRole.value).subscribe(res=>{
-      // console.log(res);
+    this.sub5 = this.http.Post(Admin.AddInRole,this.EditUserRole.value).subscribe(res=>{
+      console.log(res);
       if (res.error!=null) {
+        // this.toast.error(res.error)
         this.error = res.error
+      }
+      else{
+        this.toast.success(res.message)
       }
 
     })
