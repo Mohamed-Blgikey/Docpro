@@ -1,0 +1,35 @@
+.list{
+  justify-content: center;
+  .list-item{
+    height: 40px;
+    color: white;
+    background-color: #a6b3fd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    .label,
+    .icon{
+      transition: all 0.3s ease-in;
+      font-size: 20px !important
+    }
+    &:hover{
+      background-image: linear-gradient(to top, #fff, #42CBFC);
+      transform: scale(1.1);
+      .icon{
+        color: black;
+        transform: rotate(20deg);
+      }
+      .label{
+        color: black;
+      }
+    }
+    }
+}
+
+.active{
+  background-color: #F53D7C;
+  color: black;
+}

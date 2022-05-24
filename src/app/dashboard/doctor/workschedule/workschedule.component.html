@@ -1,10 +1,16 @@
-<h2 class="h1 my-2">Reservations :</h2>
+
+<h2 class="h1 my-2">Work Schedule :</h2>
 <hr />
 
 <div *ngIf="Reservations.length == 0" class="alert alert-danger text-center">There are no reservations at the moment</div>
 
 <div *ngIf="Reservations.length != 0 ">
-  <div *ngFor="let Reservation of Reservations">
+
+  <div class="pb-3 w-75 m-auto">
+  <input type="text" placeholder="Search ..." class="form-control" [(ngModel)]="name">
+  </div>
+
+  <div *ngFor="let Reservation of SearchuserPipe.transform(Reservations,name)">
     <div class="mb-5">
       <mat-card style="max-width: 400px" class="m-auto  shadow">
         <mat-card-header>
@@ -18,7 +24,6 @@
           <mat-card-title>
             <div>
               <p>{{ Reservation.patient?.fullName }}</p>
-              <p style="font-size: 10px;">{{Reservation.date}}</p>
             </div>
           </mat-card-title>
           <mat-card-subtitle>
@@ -28,13 +33,12 @@
 
         <mat-card-content>
           <p style="text-align: center;" class="pt-3">
-            {{Reservation.patient?.fullName}} wants to book on {{ Reservation.day }} from  {{ Reservation.from }} to {{ Reservation.to }}
+            {{Reservation.patient?.fullName}} have book on {{ Reservation.day }} from  {{ Reservation.from }} to {{ Reservation.to }}
 
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button class="bg-success text-white" (click)="ConfirmReservation(Reservation.patientId)">Confirm</button>
-          <button mat-button class="bg-danger text-white" (click)="RefuseReservation(Reservation.patientId)">Refuse</button>
+          <button mat-button class="bg-success text-white" (click)="RefuseReservation(Reservation.patientId)">Reservation Done</button>
         </mat-card-actions>
       </mat-card>
     </div>

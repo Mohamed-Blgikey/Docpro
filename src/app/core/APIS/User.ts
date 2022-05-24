@@ -1,9 +1,9 @@
 export const User={
   GetUser:'/GetUser',
-  GetUsers:"/GetUsers",
-  GetDoctors:"/GetDoctors",
-  GetPatients:"/GetPatients",
+  GetAvailableTimes : "/GetAvailableTimes",
+
   EditUser:'/EditUser',
+
   SavePhoto:"/SavePhoto",
   UnSavePhoto:"/UnSavePhoto",
   UplaodPhoto:"/UplaodPhoto"

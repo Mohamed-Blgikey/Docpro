@@ -1,0 +1,60 @@
+<h2 class="h1">Booking Doctor :</h2>
+<hr />
+
+<a class="bg-info" mat-raised-button routerLink="../../booking">Back</a>
+
+
+<div>
+  <div class="row">
+    <div class="col-sm-6 m-auto text-center">
+      <img style="border-radius: 50%; width: 250px; height: 250px;" *ngIf="doctor?.photoName" [src]="imgPrefix + doctor?.photoName" alt="">
+      <h2>{{doctor?.fullName}}</h2>
+      <h2 *ngIf="doctor?.Degree">{{doctor?.Degree}}</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 m-auto text-center">
+      <div class="alert alert-danger text-center"  *ngIf="AvailableTimes.length == 0">
+        Not available for reservation at the moment
+      </div>
+
+      <div class="text-center"  *ngIf="AvailableTimes.length != 0">
+        <form [formGroup]="bookDocForm" (ngSubmit)="bookDoc()">
+          <div class="row">
+            <div>
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>AvailableTime</mat-label>
+                <mat-select formControlName="time">
+                  <mat-option *ngFor="let AvailableTime of AvailableTimes" [value]="AvailableTime.id">
+                    <table class="table">
+                      <tr>
+                        <td class="w-50">{{AvailableTime.day}}</td>
+                        <td class="w-25"> from {{AvailableTime.from}}</td>
+                        <td class="w-25"> to {{AvailableTime.to}}</td>
+                      </tr>
+                    </table>
+
+                </mat-option>
+                </mat-select>
+                <mat-error>
+                  Please enter a valid AvailableTime
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <button
+            mat-raised-button
+            type="submit"
+            class="bg-warning text-white mb-2"
+            [disabled]="bookDocForm.invalid"
+          >
+            Book
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,8 +5,7 @@ import { Subscription } from 'rxjs';
 import { Admin } from 'src/app/core/APIS/Admin';
 import { User } from 'src/app/core/APIS/User';
 import { HttpService } from 'src/app/core/services/http.service';
-import { NotifyService } from 'src/app/core/services/notify.service';
-import { UserService } from 'src/app/core/services/user.service';
+import { NotifyService } from 'src/app/core/services/notify.service'
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -39,7 +38,7 @@ export class RolesComponent implements OnInit ,OnDestroy{
   constructor(private http:HttpService,private notify:NotifyService,private toast:HotToastService) { }
 
   ngOnInit(): void {
-    this.sub = this.http.Get(User.GetUsers).subscribe(res=>{
+    this.sub = this.http.Get(Admin.GetUsers).subscribe(res=>{
       // console.log(res.data);
       this.users = res.data;
       this.doctors = this.users.filter((u:any)=>{
@@ -58,7 +57,7 @@ export class RolesComponent implements OnInit ,OnDestroy{
 
 
     this.notify.hubConnection.on("EditUserRole",()=>{
-      this.sub2 = this.http.Get(User.GetUsers).subscribe(res=>{
+      this.sub2 = this.http.Get(Admin.GetUsers).subscribe(res=>{
         // console.log(res.data);
         this.users = res.data;
         this.doctors = this.users.filter((u:any)=>{
@@ -73,7 +72,7 @@ export class RolesComponent implements OnInit ,OnDestroy{
     })
 
     this.notify.hubConnection.on("EditUser",()=>{
-      this.sub3 = this.http.Get(User.GetUsers).subscribe(res=>{
+      this.sub3 = this.http.Get(Admin.GetUsers).subscribe(res=>{
         // console.log(res.data);
         this.users = res.data;
         this.doctors = this.users.filter((u:any)=>{
@@ -88,7 +87,7 @@ export class RolesComponent implements OnInit ,OnDestroy{
     })
 
     this.notify.hubConnection.on("NewUser",()=>{
-      this.sub4 = this.http.Get(User.GetUsers).subscribe(res=>{
+      this.sub4 = this.http.Get(Admin.GetUsers).subscribe(res=>{
         // console.log(res.data);
         this.users = res.data;
         this.doctors = this.users.filter((u:any)=>{

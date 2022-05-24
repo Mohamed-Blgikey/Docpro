@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { filter, Subscription } from 'rxjs';
 import { Admin } from 'src/app/core/APIS/Admin';
+import { Patient } from 'src/app/core/APIS/Patient';
 import { User } from 'src/app/core/APIS/User';
 import { HttpService } from 'src/app/core/services/http.service';
 import { NotifyService } from 'src/app/core/services/notify.service';
@@ -57,14 +58,14 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
       // console.log(this.freeDoctors);
     })
 
-    this.sub4 = this.http.Get(Admin.GetSections).subscribe((res) => {
+    this.sub4 = this.http.Get(Patient.GetSections).subscribe((res) => {
       // console.log(res.data) ;
       this.sections = res.data;
     });
 
 
     this.notify.hubConnection.on('AddSection', () => {
-      this.sub5 = this.http.Get(Admin.GetSections).subscribe((res) => {
+      this.sub5 = this.http.Get(Patient.GetSections).subscribe((res) => {
         // console.log(res.data) ;
         this.sections = res.data;
       });
@@ -73,7 +74,7 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
 
     this.notify.hubConnection.on('EditDoctor', () => {
 
-      this.sub7 = this.http.Get(Admin.GetSections).subscribe((res) => {
+      this.sub7 = this.http.Get(Patient.GetSections).subscribe((res) => {
         // console.log(res.data) ;
         this.sections = res.data;
       });
@@ -89,8 +90,8 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
 
     this.notify.hubConnection.on('DeleteDoctor', () => {
 
-      this.sub7 = this.http.Get(Admin.GetSections).subscribe((res) => {
-        console.log(res.data) ;
+      this.sub7 = this.http.Get(Patient.GetSections).subscribe((res) => {
+        // console.log(res.data) ;
         this.sections = res.data;
       });
 

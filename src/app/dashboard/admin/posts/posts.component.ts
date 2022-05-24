@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss'],
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit ,OnDestroy{
   sub1: Subscription | undefined;
   sub2: Subscription | undefined;
   sub3: Subscription | undefined;
@@ -38,6 +38,12 @@ export class PostsComponent implements OnInit {
     private notify: NotifyService,
     private toast :HotToastService
   ) {}
+  ngOnDestroy(): void {
+    this.sub1?.unsubscribe();
+    this.sub2?.unsubscribe();
+    this.sub3?.unsubscribe();
+    this.sub4?.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.sub1 = this.http.Get(Patient.GetPosts)

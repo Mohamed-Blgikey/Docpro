@@ -1,18 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatButtonModule} from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from "@angular/material/input";
-import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SigninComponent } from './authentication/signin/signin.component';
 import { SignupComponent } from './authentication/signup/signup.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HotToastModule } from '@ngneat/hot-toast';
 import { SharedModule } from './shared/shared.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './dashboard/admin/admin.component';
@@ -29,6 +22,13 @@ import { RequestsComponent } from './dashboard/admin/requests/requests.component
 import { DoctorpostsComponent } from './dashboard/doctor/doctorposts/doctorposts.component';
 import { PostsComponent } from './dashboard/admin/posts/posts.component';
 import { ReservationsComponent } from './dashboard/doctor/reservations/reservations.component';
+import { WorktimeComponent } from './dashboard/doctor/worktime/worktime.component';
+import { BookingComponent } from './dashboard/patient/booking/booking.component';
+import { AddbookComponent } from './dashboard/patient/booking/addbook/addbook.component';
+import { ExploreComponent } from './dashboard/patient/explore/explore.component';
+import { AcceptedreservationComponent } from './dashboard/patient/acceptedreservation/acceptedreservation.component';
+import { WorkscheduleComponent } from './dashboard/doctor/workschedule/workschedule.component';
+import { SearchuserPipe } from './core/pipes/searchuser.pipe';
 
 @NgModule({
   declarations: [
@@ -48,16 +48,21 @@ import { ReservationsComponent } from './dashboard/doctor/reservations/reservati
     RequestsComponent,
     DoctorpostsComponent,
     PostsComponent,
-    ReservationsComponent
+    ReservationsComponent,
+    WorktimeComponent,
+    BookingComponent,
+    AddbookComponent,
+    ExploreComponent,
+    AcceptedreservationComponent,
+    WorkscheduleComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HotToastModule.forRoot(),
     SharedModule
   ],
-  providers: [UserDetailResolver],
+  providers: [UserDetailResolver,SearchuserPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Subscription } from 'rxjs';
 import { Admin } from 'src/app/core/APIS/Admin';
+import { Patient } from 'src/app/core/APIS/Patient';
 import { User } from 'src/app/core/APIS/User';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { HttpService } from 'src/app/core/services/http.service';
@@ -51,13 +52,13 @@ export class SectionComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.sub = this.http.Get(Admin.GetSections).subscribe((res) => {
+    this.sub = this.http.Get(Patient.GetSections).subscribe((res) => {
       // console.log(res.data) ;
       this.sections = res.data;
     });
 
     this.notify.hubConnection.on('AddSection', () => {
-      this.sub1 = this.http.Get(Admin.GetSections).subscribe((res) => {
+      this.sub1 = this.http.Get(Patient.GetSections).subscribe((res) => {
         // console.log(res.data) ;
         this.sections = res.data;
       });

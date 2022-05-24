@@ -1,10 +1,10 @@
 export const Admin={
   GetUsers:"/GetUsers",
   GetDoctors:"/GetDoctors",
-  GetSections:"/GetSections",
   GetSection:"/GetSection",
   GetRequests:"/getRequests",
   GetRoles:"/GetRoles",
+  GetPatients:"/GetPatients",
 
   AddSection:"/AddSection",
   addDoctorToSection:"/addDoctorToSection",

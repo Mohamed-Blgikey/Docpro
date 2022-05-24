@@ -45,7 +45,7 @@ export class AuthService {
   saveUserData() {
     let token: any = localStorage.getItem('userToken');
     this.user.next(jwtDecode(token));
-    // console.log(token);
+    // console.log(this.user.getValue());
   }
 
   validRole() {

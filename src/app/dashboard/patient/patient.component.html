@@ -1,1 +1,46 @@
-<p>patient works!</p>
+<div>
+  <div class="row list">
+
+    <div class="col-sm-4">
+      <a
+        class="list-item rounded px-2 mb-1 mb-sm-0"
+        style="text-decoration: none"
+        routerLink="booking"
+        routerLinkActive="active"
+      >
+        <span class="px-2 label" style="font-size: 17px !important;">Booking</span>
+        <span class="iconify icon" data-icon="fa-solid:business-time"></span>
+      </a>
+    </div>
+
+    <div class="col-sm-4">
+      <a
+        class="list-item rounded px-2 mb-1 mb-sm-0"
+        style="text-decoration: none"
+        routerLink="acceptedreservation"
+        routerLinkActive="active"
+      >
+        <span class="px-2 label" style="font-size: 17px !important;">Accepted reservation</span>
+        <span class="iconify icon" data-icon="carbon:data-table"></span>
+      </a>
+    </div>
+
+    <div class="col-sm-4">
+      <a
+        class="list-item rounded px-2 mb-1 mb-sm-0"
+        style="text-decoration: none"
+        routerLink="posts"
+        routerLinkActive="active"
+      >
+        <span class="px-2 label">Posts</span>
+        <span class="iconify icon" data-icon="ic:outline-perm-media"></span>
+      </a>
+    </div>
+
+  </div>
+</div>
+<div class="mt-sm-5">
+  <div [@routing]="outlet.isActivated ? outlet.activatedRoute : ''">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
+</div>

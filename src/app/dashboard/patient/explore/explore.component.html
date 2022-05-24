@@ -1,0 +1,43 @@
+<h2 class="h1 my-2">Posts :</h2>
+<hr />
+
+<div *ngIf="posts.length == 0" class="alert alert-danger text-center">
+  There are no posts at the moment
+</div>
+
+<div *ngIf="posts.length != 0">
+  <div *ngFor="let post of posts">
+    <div class="mb-5">
+      <mat-card style="max-width: 400px" class="m-auto shadow">
+        <mat-card-header>
+          <div mat-card-avatar style="overflow: hidden">
+            <img
+              class="w-100 h-100"
+              [src]="imgPrefix + post.doctor.photoName"
+              [alt]="post.doctor.fullName"
+            />
+          </div>
+          <mat-card-title>
+            <div>
+              <p>{{ post.doctor.fullName }}</p>
+            </div>
+          </mat-card-title>
+          <mat-card-subtitle
+            >{{ post.date | date: "long" }}<br />
+            {{ post.topic }}</mat-card-subtitle
+          >
+        </mat-card-header>
+        <img
+          mat-card-image
+          [src]="imgPrefix + post.photoName"
+          [alt]="post.catpion"
+        />
+        <mat-card-content>
+          <p>
+            {{ post.catpion }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

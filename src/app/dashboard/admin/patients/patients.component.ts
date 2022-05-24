@@ -35,20 +35,20 @@ export class PatientsComponent implements OnInit ,OnDestroy{
   constructor(private http:HttpService,private toast:HotToastService,private notify:NotifyService) { }
 
   ngOnInit(): void {
-    this.sub = this.http.Get(User.GetPatients).subscribe(res=>{
+    this.sub = this.http.Get(Admin.GetPatients).subscribe(res=>{
       // console.log(res.data);
       this.patients = res.data;
     })
 
     this.notify.hubConnection.on("EditUser",()=>{
-      this.sub1 = this.http.Get(User.GetPatients).subscribe(res=>{
+      this.sub1 = this.http.Get(Admin.GetPatients).subscribe(res=>{
         // console.log(res.data);
         this.patients = res.data;
       })
     })
 
     this.notify.hubConnection.on("NewUser",()=>{
-      this.sub2 = this.http.Get(User.GetPatients).subscribe(res=>{
+      this.sub2 = this.http.Get(Admin.GetPatients).subscribe(res=>{
         // console.log(res.data);
         this.patients = res.data;
       })

@@ -10,6 +10,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { NotifyService } from '../core/services/notify.service';
 import { HttpService } from '../core/services/http.service';
 import { Patient } from '../core/APIS/Patient';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -17,7 +18,7 @@ import { Patient } from '../core/APIS/Patient';
 })
 export class DashboardComponent implements OnInit,OnDestroy {
 
-  user:any;
+  user:user|any;
   error:string = '';
   imgPrefix:string = environment.PhotoUrl;
   show:boolean = true;

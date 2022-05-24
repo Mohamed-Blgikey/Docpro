@@ -19,6 +19,13 @@ import { SectionComponent } from './dashboard/admin/section/section.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DoctorComponent } from './dashboard/doctor/doctor.component';
 import { DoctorpostsComponent } from './dashboard/doctor/doctorposts/doctorposts.component';
+import { ReservationsComponent } from './dashboard/doctor/reservations/reservations.component';
+import { WorkscheduleComponent } from './dashboard/doctor/workschedule/workschedule.component';
+import { WorktimeComponent } from './dashboard/doctor/worktime/worktime.component';
+import { AcceptedreservationComponent } from './dashboard/patient/acceptedreservation/acceptedreservation.component';
+import { AddbookComponent } from './dashboard/patient/booking/addbook/addbook.component';
+import { BookingComponent } from './dashboard/patient/booking/booking.component';
+import { ExploreComponent } from './dashboard/patient/explore/explore.component';
 import { PatientComponent } from './dashboard/patient/patient.component';
 import { NotfoundedComponent } from './notfounded/notfounded.component';
 
@@ -91,13 +98,29 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            redirectTo: 'doctorposts',
+            redirectTo: 'workTime',
             pathMatch: 'full',
-          },
+          }
+          ,
           {
             path: 'doctorposts',
             component: DoctorpostsComponent,
-          },
+          }
+          ,
+          {
+            path: 'Reservations',
+            component: ReservationsComponent,
+          }
+          ,
+          {
+            path: 'workTime',
+            component: WorktimeComponent,
+          }
+          ,
+          {
+            path:'workschedule',
+            component:WorkscheduleComponent
+          }
         ],
       },
 
@@ -105,6 +128,33 @@ const routes: Routes = [
         path: 'patient',
         component: PatientComponent,
         canActivate: [PatientGuard],
+        children:[
+          {
+            path:'',
+            pathMatch:'full',
+            redirectTo:'booking'
+          }
+          ,
+          {
+            path:'booking',
+            component : BookingComponent
+          }
+          ,
+          {
+            path:'addbook/:id',
+            component : AddbookComponent
+          }
+          ,
+          {
+            path:'posts',
+            component:ExploreComponent
+          }
+          ,
+          {
+            path:'acceptedreservation',
+            component:AcceptedreservationComponent
+          }
+        ]
       },
     ],
   },

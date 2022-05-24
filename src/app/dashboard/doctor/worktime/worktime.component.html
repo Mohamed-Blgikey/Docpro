@@ -1,0 +1,343 @@
+<h2 class="h1 my-2">Work Times :</h2>
+<hr />
+<button data-bs-toggle="modal" data-bs-target="#AddTime" mat-raised-button class="bg-success text-white">Appointment <span class="iconify" data-icon="carbon:add-alt"></span></button>
+
+  <div class="row">
+    <div class="col-sm-6 m-auto">
+    <div style="height: 400px; overflow-y: auto; overflow-x: hidden;">
+      <div *ngIf="AvailableTimes.length == 0" class="alert alert-danger">You have not added any appointments yet</div>
+      <table *ngIf="AvailableTimes.length != 0" class="text-center table table-striped table-hover">
+        <thead>
+
+          <th>Day</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let AvailableTime of AvailableTimes">
+            <td>{{AvailableTime.day}}</td>
+            <td>{{AvailableTime.from}}</td>
+            <td>{{AvailableTime.to}}</td>
+            <td><button data-bs-toggle="modal" data-bs-target="#EditTime" (click)="accessData(AvailableTime)"  mat-raised-button class="bg-warning text-white"><span class="iconify" data-icon="bxs:edit"></span></button></td>
+            <td><button data-bs-toggle="modal" data-bs-target="#DeleteTime" (click)="accessData(AvailableTime)" mat-raised-button class="bg-danger text-white"><span class="iconify" data-icon="fluent:delete-dismiss-28-filled"></span></button></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+<!-- AddTime -->
+<div
+class="modal fade"
+id="AddTime"
+tabindex="-1"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Add Time !!</h5>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="addTimeForm" (ngSubmit)="addTime()">
+        <div>
+          <div class="mb-2">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Day</mat-label>
+              <input autocomplete="off" list="Days" matInput formControlName="day" />
+              <mat-error
+                *ngIf="addTimeForm.get('day')?.hasError('required')"
+              >
+                Day is required
+              </mat-error>
+              <mat-error
+                *ngIf="addTimeForm.get('day')?.hasError('pattern')"
+              >
+                Invalid day
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <datalist id="Days">
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+          </datalist>
+        </div>
+
+        <div>
+          <div class="mb-2">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>From</mat-label>
+              <input autocomplete="off" list="Times" matInput formControlName="from" />
+              <mat-error
+                *ngIf="addTimeForm.get('from')?.hasError('required')"
+              >
+                Day is required
+              </mat-error>
+              <mat-error
+                *ngIf="addTimeForm.get('from')?.hasError('pattern')"
+              >
+                must start with number from 1 to 12 followed by am or pm like 12am
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div>
+          <div class="mb-2">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>To</mat-label>
+              <input autocomplete="off" list="Times" matInput formControlName="to" />
+              <mat-error
+                *ngIf="addTimeForm.get('to')?.hasError('required')"
+              >
+                Day is required
+              </mat-error>
+              <mat-error
+                *ngIf="addTimeForm.get('to')?.hasError('pattern')"
+              >
+                must start with number from 1 to 12 followed by am or pm like 12am
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <datalist id="Times">
+          <option value="1am">1am</option>
+          <option value="2am">2am</option>
+          <option value="3am">3am</option>
+          <option value="4am">4am</option>
+          <option value="5am">5am</option>
+          <option value="6am">6am</option>
+          <option value="7am">7am</option>
+          <option value="8am">8am</option>
+          <option value="9am">9am</option>
+          <option value="10am">10am</option>
+          <option value="11am">11am</option>
+          <option value="12am">12am</option>
+
+          <option value="1pm">1pm</option>
+          <option value="2pm">2pm</option>
+          <option value="3pm">3pm</option>
+          <option value="4pm">4pm</option>
+          <option value="5pm">5pm</option>
+          <option value="6pm">6pm</option>
+          <option value="7pm">7pm</option>
+          <option value="8pm">8pm</option>
+          <option value="9pm">9pm</option>
+          <option value="10pm">10pm</option>
+          <option value="11pm">11pm</option>
+          <option value="12pm">12pm</option>
+        </datalist>
+        <input hidden type="text" formControlName="doctorId">
+        <button [disabled]="addTimeForm.invalid" mat-flat-button class="bg-success text-white">Add <span class="iconify" data-icon="carbon:add-alt"></span></button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- EditTime -->
+<div
+class="modal fade"
+id="EditTime"
+tabindex="-1"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Edit Time !!</h5>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="EditAndDeleteForm" (ngSubmit)="EditTime()">
+        <div>
+          <div class="mb-2">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Day</mat-label>
+              <input autocomplete="off" list="Days" matInput formControlName="day" />
+              <mat-error
+                *ngIf="EditAndDeleteForm.get('day')?.hasError('required')"
+              >
+                Day is required
+              </mat-error>
+              <mat-error
+                *ngIf="EditAndDeleteForm.get('day')?.hasError('pattern')"
+              >
+                Invalid day
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div>
+          <div class="mb-2">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>From</mat-label>
+              <input autocomplete="off" list="Times" matInput formControlName="from" />
+              <mat-error
+                *ngIf="EditAndDeleteForm.get('from')?.hasError('required')"
+              >
+                Day is required
+              </mat-error>
+              <mat-error
+                *ngIf="EditAndDeleteForm.get('from')?.hasError('pattern')"
+              >
+                must start with number from 1 to 12 followed by am or pm like 12am
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div>
+          <div class="mb-2">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>To</mat-label>
+              <input autocomplete="off" list="Times" matInput formControlName="to" />
+              <mat-error
+                *ngIf="EditAndDeleteForm.get('to')?.hasError('required')"
+              >
+                Day is required
+              </mat-error>
+              <mat-error
+                *ngIf="EditAndDeleteForm.get('to')?.hasError('pattern')"
+              >
+                must start with number from 1 to 12 followed by am or pm like 12am
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <input hidden type="text" formControlName="doctorId">
+        <button [disabled]="EditAndDeleteForm.invalid" data-bs-dismiss="modal" mat-flat-button class="bg-warning text-white">Edit <span class="iconify" data-icon="bxs:edit"></span></button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+
+  <!-- DeleteTime -->
+  <div
+  class="modal fade"
+  id="DeleteTime"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Time !!</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="EditAndDeleteForm" (ngSubmit)="DeleteTime()">
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Day</mat-label>
+                <input readonly matInput formControlName="day" />
+                <mat-error
+                  *ngIf="EditAndDeleteForm.get('day')?.hasError('required')"
+                >
+                  Day is required
+                </mat-error>
+                <mat-error
+                  *ngIf="EditAndDeleteForm.get('day')?.hasError('pattern')"
+                >
+                  Invalid day
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>From</mat-label>
+                <input readonly matInput formControlName="from" />
+                <mat-error
+                  *ngIf="EditAndDeleteForm.get('from')?.hasError('required')"
+                >
+                  Day is required
+                </mat-error>
+                <mat-error
+                  *ngIf="EditAndDeleteForm.get('from')?.hasError('pattern')"
+                >
+                  must start with number from 1 to 12 followed by am or pm like 12am
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>To</mat-label>
+                <input readonly matInput formControlName="to" />
+                <mat-error
+                  *ngIf="EditAndDeleteForm.get('to')?.hasError('required')"
+                >
+                  Day is required
+                </mat-error>
+                <mat-error
+                  *ngIf="EditAndDeleteForm.get('to')?.hasError('pattern')"
+                >
+                  must start with number from 1 to 12 followed by am or pm like 12am
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <input hidden type="text" formControlName="doctorId">
+          <button [disabled]="EditAndDeleteForm.invalid" data-bs-dismiss="modal" mat-flat-button class="bg-danger text-white">Delete <span class="iconify" data-icon="fluent:delete-dismiss-28-filled"></span></button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>
