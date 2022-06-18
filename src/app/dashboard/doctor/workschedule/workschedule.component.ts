@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Subscription } from 'rxjs';
 import { Doctor } from 'src/app/core/APIS/Doctor';
@@ -21,6 +22,11 @@ export class WorkscheduleComponent implements OnInit {
   sub4:Subscription|undefined;
   sub5:Subscription|undefined;
   sub6:Subscription|undefined;
+
+  ReportFrom = new FormGroup({
+    diagnosis:new FormControl('',[Validators.required]),
+    treatment:new FormControl('',[Validators.required])
+  })
   name :string = '';
   imgPrefix:string = environment.PhotoUrl;
   Reservations:reservation[] = [];
@@ -59,10 +65,13 @@ export class WorkscheduleComponent implements OnInit {
 
 
 
-  RefuseReservation(patientId:string){
-    this.sub5 = this.http.Post(`${Doctor.ReservationDone}/${patientId}`).subscribe(res=>{
-      this.toast.success(res.data);
-    })
+  patientId:string = '';
+  ReservationDone(){
+    console.log(this.patientId,this.ReportFrom.value);
+    this.sub5 = this.http.Post(`${Doctor.ReservationDone}/${this.patientId}`,this.ReportFrom.value).subscribe(res=>{
+        this.toast.success(res.data);
+        this.ReportFrom.reset()
+      })
   }
 
 }

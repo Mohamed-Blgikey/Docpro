@@ -29,6 +29,7 @@ import { ExploreComponent } from './dashboard/patient/explore/explore.component'
 import { AcceptedreservationComponent } from './dashboard/patient/acceptedreservation/acceptedreservation.component';
 import { WorkscheduleComponent } from './dashboard/doctor/workschedule/workschedule.component';
 import { SearchuserPipe } from './core/pipes/searchuser.pipe';
+import { MyReportsComponent } from './dashboard/patient/my-reports/my-reports.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { SearchuserPipe } from './core/pipes/searchuser.pipe';
     AddbookComponent,
     ExploreComponent,
     AcceptedreservationComponent,
-    WorkscheduleComponent
+    WorkscheduleComponent,
+    MyReportsComponent
   ],
   imports: [
     BrowserModule,

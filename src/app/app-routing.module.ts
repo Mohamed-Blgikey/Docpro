@@ -26,6 +26,7 @@ import { AcceptedreservationComponent } from './dashboard/patient/acceptedreserv
 import { AddbookComponent } from './dashboard/patient/booking/addbook/addbook.component';
 import { BookingComponent } from './dashboard/patient/booking/booking.component';
 import { ExploreComponent } from './dashboard/patient/explore/explore.component';
+import { MyReportsComponent } from './dashboard/patient/my-reports/my-reports.component';
 import { PatientComponent } from './dashboard/patient/patient.component';
 import { NotfoundedComponent } from './notfounded/notfounded.component';
 
@@ -120,6 +121,9 @@ const routes: Routes = [
           {
             path:'workschedule',
             component:WorkscheduleComponent
+          },{
+            path:'myReports',
+            component:MyReportsComponent
           }
         ],
       },
@@ -153,6 +157,9 @@ const routes: Routes = [
           {
             path:'acceptedreservation',
             component:AcceptedreservationComponent
+          },{
+            path:'myReports',
+            component:MyReportsComponent
           }
         ]
       },

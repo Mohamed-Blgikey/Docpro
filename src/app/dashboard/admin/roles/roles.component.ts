@@ -116,7 +116,7 @@ export class RolesComponent implements OnInit ,OnDestroy{
   editUserRole(){
     // console.log(this.EditUserInfo.value);
     this.sub5 = this.http.Post(Admin.AddInRole,this.EditUserRole.value).subscribe(res=>{
-      console.log(res);
+      // console.log(res);
       if (res.error!=null) {
         // this.toast.error(res.error)
         this.error = res.error

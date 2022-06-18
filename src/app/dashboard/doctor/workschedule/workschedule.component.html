@@ -38,10 +38,84 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button class="bg-success text-white" (click)="RefuseReservation(Reservation.patientId)">Reservation Done</button>
+          <button mat-button class="bg-success text-white" data-bs-toggle="modal"  data-bs-target="#MakeReport" (click)="patientId = Reservation.patientId">Reservation Done</button>
         </mat-card-actions>
       </mat-card>
     </div>
   </div>
 
+</div>
+
+
+<!-- Edit UserInfo -->
+<div
+  class="modal fade"
+  id="MakeReport"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Reservation Done
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="ReportFrom" (ngSubmit)="ReservationDone()">
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Diagnosis</mat-label>
+                <textarea matInput formControlName="diagnosis" name=""  rows="3"></textarea>
+                <mat-error
+                  *ngIf="ReportFrom.get('diagnosis')?.hasError('required')&& ReportFrom.get('diagnosis')?.touched"
+                >
+                  Diagnosis is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div>
+            <div class="mb-2">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Treatment</mat-label>
+                <textarea matInput formControlName="treatment" name=""  rows="3"></textarea>
+                <mat-error
+                  *ngIf="ReportFrom.get('treatment')?.hasError('required')&& ReportFrom.get('treatment')?.touched"
+                >
+                Treatment is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+
+
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="ReportFrom.invalid"
+            data-bs-dismiss="modal"
+          >
+            Save changes
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

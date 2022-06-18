@@ -63,12 +63,17 @@ export class DashboardComponent implements OnInit,OnDestroy {
     })
 
     this.notify.hubConnection.on("EditUserRole",()=>{
-      this.userService.getUser(this.user.id).subscribe(res=>{
-        // console.log(res.data);
+      if (this.authService.user['_value'].status != 'Admin') {
+
+        this.userService.getUser(this.user.id).subscribe(res=>{
+          // console.log(res.data);
         if (res.data.status != this.authService.user['_value'].status) {
           this.authService.logOut()
         }
       });
+    }
+
+
     })
   }
 

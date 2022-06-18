@@ -94,7 +94,7 @@ export class AddbookComponent implements OnInit,OnDestroy {
 
     // console.log(data);
     this.http.Post(Patient.BookDoctor,data).subscribe(res=>{
-      console.log(res);
+      // console.log(res);
 
       if (res.error != null) {
         this.toast.error(res.error)

@@ -21,6 +21,8 @@ export class AuthService {
   ) {
     if (localStorage.getItem('userToken')) {
       this.saveUserData();
+      // console.log(this.user.getValue());
+
     }
   }
   signin(obj: any): Observable<any> {

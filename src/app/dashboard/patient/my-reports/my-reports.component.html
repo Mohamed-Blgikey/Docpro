@@ -1,0 +1,59 @@
+<button (click)="PrintAll()" mat-raised-button style="color: white; background-color: #E95420;">Print</button>
+<div id="print">
+
+<div class="text-center" >
+  <div style="width: 50% !important;" class="container mt-5">
+          <h2 class="header">Medical Record<span> &nbsp;</span></h2>
+   </div>
+     <table  class="table table-striped w-75 m-auto my-5">
+          <tr>
+           <th>#</th>
+           <th>Doctor Name</th>
+           <th>Patient Name</th>
+           <th>Diagnosis</th>
+           <th>Treatment</th>
+           <th>Date</th>
+         </tr>
+
+
+         <tr *ngFor="let Report of BookReports|  paginate: { id: 'foo', itemsPerPage: itemPerPage, currentPage: p, totalItems: totalItems }; let i = index">
+             <td>{{i+1}}</td>
+             <td> {{Report.doctor.fullName}}</td>
+             <td> {{Report.patient.fullName}}</td>
+             <td *ngIf="Report.diagnosis != ''">{{Report.diagnosis}}</td>
+             <td *ngIf="Report.diagnosis == ''">Not diagnosed</td>
+             <td  *ngIf="Report.treatment != ''">{{Report.treatment}}</td>
+             <td  *ngIf="Report.treatment == ''">There is no cure</td>
+             <td>{{Report.date |date:'MMM d, y, h:mm a'}}</td>
+         </tr>
+
+
+     </table>
+
+     <div style="width: 80% !important; margin-top: 75px !important;" class="container mt-5">
+      <h2 class="header">Number Of Reports<span class="ms-4"> {{totalItems}} </span></h2>
+   </div>
+
+   <div style="width: 90% !important;" class="container">
+          <h2 class="header-up">DocPro By Our Team</h2>
+          <span>  &nbsp;</span>
+          <span>  &nbsp;</span>
+       </div>
+</div>
+
+<!--
+<div class="py-2 text-center text-success">
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</div> -->
+
+<div style="display: flex;justify-content: center;">
+  <pagination-controls  id="foo"
+                      (pageChange)="p = $event;pageChanged()"
+                      previousLabel="Previous"
+                      nextLabel="Next"
+                      screenReaderPaginationLabel="Pagination"
+                      screenReaderPageLabel="page"
+                      screenReaderCurrentLabel="You're on page">
+</pagination-controls>
+</div>
+</div>
