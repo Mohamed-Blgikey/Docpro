@@ -47,8 +47,8 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
     canActivate: [AuthGuard],
+    component: DashboardComponent,
     resolve: {
       user: UserDetailResolver,
     },

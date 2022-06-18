@@ -38,21 +38,21 @@ export class ReservationsComponent implements OnInit,OnDestroy {
       // console.log(this.Reservations);
     })
 
-    this.notify.hubConnection.on("newBook",()=>{
+    this.notify.hubConnection.on("BookDoctor",()=>{
       this.sub2 = this.http.Get(Doctor.GetReservation).subscribe(res=>{
         this.Reservations = res.data
         // console.log(this.Reservations);
       })
     })
 
-    this.notify.hubConnection.on("confirmReservation",()=>{
+    this.notify.hubConnection.on("confirmReservations",()=>{
       this.sub3 = this.http.Get(Doctor.GetReservation).subscribe(res=>{
         this.Reservations = res.data
         // console.log(this.Reservations);
       })
     })
 
-    this.notify.hubConnection.on("RefuseReservation",()=>{
+    this.notify.hubConnection.on("RefuseReservations",()=>{
       this.sub6 = this.http.Get(Doctor.GetReservation).subscribe(res=>{
         this.Reservations = res.data
         // console.log(this.Reservations);

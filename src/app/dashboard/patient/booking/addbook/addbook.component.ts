@@ -54,21 +54,21 @@ export class AddbookComponent implements OnInit,OnDestroy {
       this.doctor = res.data;
     })
 
-    this.notify.hubConnection.on("AddAvailableTime",()=>{
+    this.notify.hubConnection.on("AddAvailableTimes",()=>{
       this.sub3 = this.http.Get(`${User.GetAvailableTimes}/${this.doctorId}`).subscribe(res=>{
         // console.log(res.data);
         this.AvailableTimes = res.data
       })
     })
 
-    this.notify.hubConnection.on("EditAvailableTime",()=>{
+    this.notify.hubConnection.on("EditAvailableTimes",()=>{
       this.sub4 = this.http.Get(`${User.GetAvailableTimes}/${this.doctorId}`).subscribe(res=>{
         // console.log(res.data);
         this.AvailableTimes = res.data
       })
     })
 
-    this.notify.hubConnection.on("DeleteAvailableTime",()=>{
+    this.notify.hubConnection.on("DeleteAvailableTimes",()=>{
       this.sub5 = this.http.Get(`${User.GetAvailableTimes}/${this.doctorId}`).subscribe(res=>{
         // console.log(res.data);
         this.AvailableTimes = res.data
@@ -94,6 +94,8 @@ export class AddbookComponent implements OnInit,OnDestroy {
 
     // console.log(data);
     this.http.Post(Patient.BookDoctor,data).subscribe(res=>{
+      console.log(res);
+
       if (res.error != null) {
         this.toast.error(res.error)
       }else{

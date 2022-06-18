@@ -40,7 +40,15 @@ export class BookingComponent implements OnInit {
     });
 
 
+
+
     this.notify.hubConnection.on('AddSection', () => {
+      this.sub2 = this.http.Get(Patient.GetSections).subscribe((res) => {
+        // console.log(res.data) ;
+        this.sections = res.data;
+      });
+    });
+    this.notify.hubConnection.on('EditUserRoleToPatient', () => {
       this.sub2 = this.http.Get(Patient.GetSections).subscribe((res) => {
         // console.log(res.data) ;
         this.sections = res.data;
@@ -48,7 +56,7 @@ export class BookingComponent implements OnInit {
     });
 
 
-    this.notify.hubConnection.on('EditDoctor', () => {
+    this.notify.hubConnection.on('addDoctorToSection', () => {
 
       this.sub3 = this.http.Get(Patient.GetSections).subscribe((res) => {
         // console.log(res.data) ;

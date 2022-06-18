@@ -54,6 +54,13 @@ export class PatientsComponent implements OnInit ,OnDestroy{
       })
     })
 
+    this.notify.hubConnection.on("DeletePatient",()=>{
+      this.sub2 = this.http.Get(Admin.GetPatients).subscribe(res=>{
+        // console.log(res.data);
+        this.patients = res.data;
+      })
+    })
+
   }
 
   AccessDate(user:any){

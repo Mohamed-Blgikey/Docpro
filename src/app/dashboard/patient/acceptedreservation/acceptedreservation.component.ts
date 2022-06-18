@@ -29,14 +29,14 @@ export class AcceptedreservationComponent implements OnInit,OnDestroy {
       this.AcceptedReservations = res.data;
     })
 
-    this.notify.hubConnection.on("confirmReservation",()=>{
+    this.notify.hubConnection.on("confirmReservations",()=>{
       this.sub2 = this.http.Get(Patient.GetAcceptedReservation).subscribe(res=>{
-        // console.log(res.data);
+        console.log(res.data);
         this.AcceptedReservations = res.data;
       })
     })
 
-    this.notify.hubConnection.on("RefuseReservation",()=>{
+    this.notify.hubConnection.on("ReservationDone",()=>{
       this.sub2 = this.http.Get(Patient.GetAcceptedReservation).subscribe(res=>{
         // console.log(res.data);
         this.AcceptedReservations = res.data;

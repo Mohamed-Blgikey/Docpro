@@ -69,7 +69,15 @@ export class DoctorpostsComponent implements OnInit, OnDestroy {
       // console.log(res.data);
     });
 
-    this.notify.hubConnection.on('postAction', () => {
+    this.notify.hubConnection.on('Deletepost', () => {
+      this.sub2 = this.http.Get(Doctor.GetDoctorPosts).subscribe((res) => {
+        this.posts = res.data;
+        // console.log(this.posts);
+        // console.log(res.data);
+      });
+    });
+
+    this.notify.hubConnection.on('Addpost', () => {
       this.sub2 = this.http.Get(Doctor.GetDoctorPosts).subscribe((res) => {
         this.posts = res.data;
         // console.log(this.posts);

@@ -6,7 +6,7 @@ export const Doctor={
 
   AddPost:"/AddPost",
   AddAvailableTime:"/AddAvailableTime",
-
+  ReservationDone:"/ReservationDone",
 
   EditAvailableTime:"/EditAvailableTime",
   confirmReservation:"/confirmReservation",

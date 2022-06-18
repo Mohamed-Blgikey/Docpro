@@ -72,7 +72,10 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
     });
 
 
-    this.notify.hubConnection.on('EditDoctor', () => {
+
+
+
+    this.notify.hubConnection.on('addDoctorToSection', () => {
 
       this.sub7 = this.http.Get(Patient.GetSections).subscribe((res) => {
         // console.log(res.data) ;

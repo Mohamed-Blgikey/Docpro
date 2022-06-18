@@ -33,10 +33,11 @@ export class RequestsComponent implements OnInit ,OnDestroy{
       // console.log("asdassad");
       this.sub2 = this.http.Get(Admin.GetRequests).subscribe(res=>{
         this.requests = res.data
+        // console.log(res);
       })
     })
 
-    this.notify.hubConnection.on("DeleteRequest",()=>{
+    this.notify.hubConnection.on("DeleteRequests",()=>{
       // console.log("asdassad");
       this.sub3 = this.http.Get(Admin.GetRequests).subscribe(res=>{
         this.requests = res.data

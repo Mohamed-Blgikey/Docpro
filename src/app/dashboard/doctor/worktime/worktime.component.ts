@@ -60,21 +60,21 @@ export class WorktimeComponent implements OnInit,OnDestroy {
     this.addTimeForm.controls['doctorId'].setValue(this.auth.user['_value'].nameid)
     this.EditAndDeleteForm.controls['doctorId'].setValue(this.auth.user['_value'].nameid)
 
-    this.notify.hubConnection.on("AddAvailableTime",()=>{
+    this.notify.hubConnection.on("AddAvailableTimes",()=>{
       this.sub3 = this.http.Get(`${User.GetAvailableTimes}/${this.auth.user['_value'].nameid}`).subscribe(res=>{
         // console.log(res.data);
         this.AvailableTimes = res.data;
       })
     })
 
-    this.notify.hubConnection.on("EditAvailableTime",()=>{
+    this.notify.hubConnection.on("EditAvailableTimes",()=>{
       this.sub5 = this.http.Get(`${User.GetAvailableTimes}/${this.auth.user['_value'].nameid}`).subscribe(res=>{
         // console.log(res.data);
         this.AvailableTimes = res.data;
       })
     })
 
-    this.notify.hubConnection.on("DeleteAvailableTime",()=>{
+    this.notify.hubConnection.on("DeleteAvailableTimes",()=>{
       this.sub7 = this.http.Get(`${User.GetAvailableTimes}/${this.auth.user['_value'].nameid}`).subscribe(res=>{
         // console.log(res.data);
         this.AvailableTimes = res.data;

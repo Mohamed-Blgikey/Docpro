@@ -40,21 +40,15 @@ export class WorkscheduleComponent implements OnInit {
       // console.log(this.Reservations);
     })
 
-    this.notify.hubConnection.on("newBook",()=>{
+    this.notify.hubConnection.on("BookDoctor",()=>{
       this.sub2 = this.http.Get(Doctor.GetWorkSchedule).subscribe(res=>{
         this.Reservations = res.data
         // console.log(this.Reservations);
       })
     })
 
-    this.notify.hubConnection.on("confirmReservation",()=>{
-      this.sub3 = this.http.Get(Doctor.GetWorkSchedule).subscribe(res=>{
-        this.Reservations = res.data
-        // console.log(this.Reservations);
-      })
-    })
 
-    this.notify.hubConnection.on("RefuseReservation",()=>{
+    this.notify.hubConnection.on("ReservationDone",()=>{
       this.sub6 = this.http.Get(Doctor.GetWorkSchedule).subscribe(res=>{
         this.Reservations = res.data
         // console.log(this.Reservations);
@@ -66,7 +60,7 @@ export class WorkscheduleComponent implements OnInit {
 
 
   RefuseReservation(patientId:string){
-    this.sub5 = this.http.Post(`${Doctor.RefuseReservation}/${patientId}`).subscribe(res=>{
+    this.sub5 = this.http.Post(`${Doctor.ReservationDone}/${patientId}`).subscribe(res=>{
       this.toast.success(res.data);
     })
   }

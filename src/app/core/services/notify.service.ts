@@ -12,9 +12,7 @@ export class NotifyService {
 
   }
   openConneection(){
-    this.hubConnection = new signalr.HubConnectionBuilder()
-                                .withUrl(`${environment.baseUrl}/Notify`).build();
-
+    this.hubConnection = new signalr.HubConnectionBuilder().withUrl(`${environment.baseUrl}/Notify`).build();
     this.hubConnection.start().then(()=>{
       console.log("Connection Start");
     }).catch((err:any)=>console.log(err));

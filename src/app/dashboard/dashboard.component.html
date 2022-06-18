@@ -141,7 +141,7 @@
             Edit
           </button>
         </div>
-        <div *ngIf="user.status == 'Patient' && user.degree == null && show">
+        <div *ngIf="user.status == 'Patient' && user.degree == null">
           <button
             (click)="MakeRequestForm.controls['patientId'].setValue(user.id)"
             mat-button

@@ -64,6 +64,7 @@ export class SectionComponent implements OnInit, OnDestroy {
       });
     });
 
+
     // this.http.Get(`${Admin.GetSection}/2`).subscribe(res=>{
     //   console.log(res.data);
     // })

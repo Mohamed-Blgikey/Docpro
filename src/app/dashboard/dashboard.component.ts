@@ -21,7 +21,6 @@ export class DashboardComponent implements OnInit,OnDestroy {
   user:user|any;
   error:string = '';
   imgPrefix:string = environment.PhotoUrl;
-  show:boolean = true;
 
   EditUserInfo:FormGroup = new FormGroup({
       id: new FormControl('',[Validators.required]),
@@ -120,7 +119,6 @@ export class DashboardComponent implements OnInit,OnDestroy {
 
 
   makeRequest(){
-    this.show = false;
     this.http.Post(Patient.MakeRequest,this.MakeRequestForm.value)
     .pipe(
       this.toast.observe({
@@ -130,7 +128,9 @@ export class DashboardComponent implements OnInit,OnDestroy {
       })
     )
     .subscribe(res=>{
-
+      this.userService.getUser(this.user.id).subscribe(res=>{
+        this.user = res.data;
+      });
     })
   }
 
