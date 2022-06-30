@@ -21,7 +21,6 @@ export class PostsComponent implements OnInit ,OnDestroy{
   sub2: Subscription | undefined;
   sub3: Subscription | undefined;
   sub4: Subscription | undefined;
-  imgPrefix = environment.PhotoUrl;
   posts: post[] = [];
 
   DeletePostFrom: FormGroup = new FormGroup({
@@ -29,6 +28,7 @@ export class PostsComponent implements OnInit ,OnDestroy{
     topic: new FormControl(null, [Validators.required]),
     catpion: new FormControl(null, [Validators.required]),
     photoName: new FormControl(null, [Validators.required]),
+    publicId: new FormControl(null, [Validators.required]),
     doctorId: new FormControl(null, [Validators.required]),
   });
 
@@ -55,7 +55,7 @@ export class PostsComponent implements OnInit ,OnDestroy{
 
 
 
-    this.notify.hubConnection.on('Deletepost', () => {
+    this.notify.hubConnection.on('postAction', () => {
       this.sub2 = this.http.Get(Patient.GetPosts).subscribe((res) => {
         this.posts = res.data;
         // console.log(this.posts);
@@ -63,13 +63,7 @@ export class PostsComponent implements OnInit ,OnDestroy{
       });
     });
 
-    this.notify.hubConnection.on('Addpost', () => {
-      this.sub2 = this.http.Get(Patient.GetPosts).subscribe((res) => {
-        this.posts = res.data;
-        // console.log(this.posts);
-        // console.log(res.data);
-      });
-    });
+
   }
 
   DeletedData(post: post) {
@@ -77,6 +71,7 @@ export class PostsComponent implements OnInit ,OnDestroy{
     this.DeletePostFrom.controls['topic'].setValue(post.topic);
     this.DeletePostFrom.controls['catpion'].setValue(post.catpion);
     this.DeletePostFrom.controls['photoName'].setValue(post.photoName);
+    this.DeletePostFrom.controls['publicId'].setValue(post.publicId);
     this.DeletePostFrom.controls['doctorId'].setValue(post.doctorId);
   }
   Delete() {
@@ -90,13 +85,9 @@ export class PostsComponent implements OnInit ,OnDestroy{
         })
       )
       .subscribe((res) => {
-        // console.log(res);
-        let photo = {
-          userId: this.auth.user['_value'].nameid,
-          name: this.DeletePostFrom.controls['photoName'].value,
-        };
 
-        this.sub4 = this.http.Post(User.UnSavePhoto, photo).subscribe((res) => {
+
+        this.sub4 = this.http.Post(`${User.UnSavePhoto}/${this.DeletePostFrom.controls['publicId'].value}`).subscribe((res) => {
           // console.log(res);
         });
       });

@@ -7,7 +7,7 @@
 <div>
   <div class="row">
     <div class="col-sm-6 m-auto text-center">
-      <img style="border-radius: 50%; width: 250px; height: 250px;" *ngIf="doctor?.photoName" [src]="imgPrefix + doctor?.photoName" alt="">
+      <img style="border-radius: 50%; width: 250px; height: 250px;" *ngIf="doctor?.photoName" [src]=" doctor?.photoName" alt="">
       <h2>{{doctor?.fullName}}</h2>
       <h2 *ngIf="doctor?.Degree">{{doctor?.Degree}}</h2>
     </div>

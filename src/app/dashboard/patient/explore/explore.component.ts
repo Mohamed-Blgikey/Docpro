@@ -18,7 +18,6 @@ export class ExploreComponent implements OnInit {
   sub2: Subscription | undefined;
   sub3: Subscription | undefined;
   sub4: Subscription | undefined;
-  imgPrefix = environment.PhotoUrl;
   posts: post[] = [];
 
   constructor(
@@ -44,7 +43,7 @@ export class ExploreComponent implements OnInit {
 
 
 
-    this.notify.hubConnection.on('Deletepost', () => {
+    this.notify.hubConnection.on('postAction', () => {
       this.sub2 = this.http.Get(Patient.GetPosts).subscribe((res) => {
         this.posts = res.data;
         // console.log(this.posts);
@@ -52,13 +51,7 @@ export class ExploreComponent implements OnInit {
       });
     });
 
-    this.notify.hubConnection.on('Addpost', () => {
-      this.sub2 = this.http.Get(Patient.GetPosts).subscribe((res) => {
-        this.posts = res.data;
-        // console.log(this.posts);
-        // console.log(res.data);
-      });
-    });
+
   }
 
 

@@ -19,7 +19,6 @@ export class RequestsComponent implements OnInit ,OnDestroy{
 
   requests:[] = [];
 
-  imgPrefix:string = environment.PhotoUrl;
   constructor(private http:HttpService,private notify:NotifyService,private toast:HotToastService) { }
 
 

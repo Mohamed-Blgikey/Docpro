@@ -19,7 +19,6 @@ import { NotifyService } from 'src/app/core/services/notify.service';
 })
 export class AddbookComponent implements OnInit,OnDestroy {
 
-  imgPrefix:string = environment.PhotoUrl;
   sub1:Subscription|undefined;
   sub2:Subscription|undefined;
   sub3:Subscription|undefined;

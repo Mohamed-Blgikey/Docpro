@@ -28,7 +28,6 @@ export class WorkscheduleComponent implements OnInit {
     treatment:new FormControl('',[Validators.required])
   })
   name :string = '';
-  imgPrefix:string = environment.PhotoUrl;
   Reservations:reservation[] = [];
   constructor(private http:HttpService,private notify:NotifyService,private toast:HotToastService,public SearchuserPipe:SearchuserPipe) { }
   ngOnDestroy(): void {

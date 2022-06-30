@@ -13,7 +13,7 @@
           <div mat-card-avatar style="overflow: hidden">
             <img
               class="w-100 h-100"
-              [src]="imgPrefix + post.doctor.photoName"
+              [src]=" post.doctor.photoName"
               [alt]="post.doctor.fullName"
             />
           </div>
@@ -29,7 +29,7 @@
         </mat-card-header>
         <img
           mat-card-image
-          [src]="imgPrefix + post.photoName"
+          [src]=" post.photoName"
           [alt]="post.catpion"
         />
         <mat-card-content>

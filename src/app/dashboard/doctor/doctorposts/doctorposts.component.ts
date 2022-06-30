@@ -18,6 +18,7 @@ import { environment } from 'src/environments/environment';
 export class DoctorpostsComponent implements OnInit, OnDestroy {
   file: any;
   fileName: string = '';
+  publicId: string = '';
   fileNameEdit: string = '';
   sub1: Subscription | undefined;
   sub2: Subscription | undefined;
@@ -25,7 +26,6 @@ export class DoctorpostsComponent implements OnInit, OnDestroy {
   sub4: Subscription | undefined;
   sub5: Subscription | undefined;
   sub6: Subscription | undefined;
-  imgPrefix = environment.PhotoUrl;
   posts: post[] = [];
 
   DeletePostFrom: FormGroup = new FormGroup({
@@ -33,6 +33,7 @@ export class DoctorpostsComponent implements OnInit, OnDestroy {
     topic: new FormControl(null, [Validators.required]),
     catpion: new FormControl(null, [Validators.required]),
     photoName: new FormControl(null, [Validators.required]),
+    publicId: new FormControl(null, [Validators.required]),
     doctorId: new FormControl(null, [Validators.required]),
   });
 
@@ -40,6 +41,8 @@ export class DoctorpostsComponent implements OnInit, OnDestroy {
     topic: new FormControl(null, [Validators.required]),
     catpion: new FormControl(null, [Validators.required]),
     photoName: new FormControl(null, [Validators.required]),
+    publicId: new FormControl(null, [Validators.required]),
+
     doctorId: new FormControl(this.auth.user['_value'].nameid, [
       Validators.required,
     ]),
@@ -69,7 +72,7 @@ export class DoctorpostsComponent implements OnInit, OnDestroy {
       // console.log(res.data);
     });
 
-    this.notify.hubConnection.on('Deletepost', () => {
+    this.notify.hubConnection.on('postAction', () => {
       this.sub2 = this.http.Get(Doctor.GetDoctorPosts).subscribe((res) => {
         this.posts = res.data;
         // console.log(this.posts);
@@ -77,13 +80,7 @@ export class DoctorpostsComponent implements OnInit, OnDestroy {
       });
     });
 
-    this.notify.hubConnection.on('Addpost', () => {
-      this.sub2 = this.http.Get(Doctor.GetDoctorPosts).subscribe((res) => {
-        this.posts = res.data;
-        // console.log(this.posts);
-        // console.log(res.data);
-      });
-    });
+
   }
 
   AddPost() {
@@ -100,6 +97,7 @@ export class DoctorpostsComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         // console.log(res);
         this.fileName = '';
+        this.publicId = '';
       });
   }
 
@@ -108,10 +106,12 @@ export class DoctorpostsComponent implements OnInit, OnDestroy {
     this.file = event.target.files[0];
     // console.log(this.file);
     const formData: FormData = new FormData();
-    formData.append('uploadedFile', this.file, this.file.name);
+    formData.append('File', this.file, this.file.name);
     this.sub2 = this.http.Post(User.UplaodPhoto, formData).subscribe((res) => {
       this.fileName = res.message;
+      this.publicId = res.publicId;
       this.AddPostForm.controls['photoName'].setValue(this.fileName);
+      this.AddPostForm.controls['publicId'].setValue(this.publicId);
     });
   }
   DeletedData(post: post) {
@@ -119,6 +119,7 @@ export class DoctorpostsComponent implements OnInit, OnDestroy {
     this.DeletePostFrom.controls['topic'].setValue(post.topic);
     this.DeletePostFrom.controls['catpion'].setValue(post.catpion);
     this.DeletePostFrom.controls['photoName'].setValue(post.photoName);
+    this.DeletePostFrom.controls['publicId'].setValue(post.publicId);
     this.DeletePostFrom.controls['doctorId'].setValue(post.doctorId);
   }
   Delete() {
@@ -133,24 +134,21 @@ export class DoctorpostsComponent implements OnInit, OnDestroy {
         )
       .subscribe((res) => {
         // console.log(res);
-        let photo = {
-          userId: this.auth.user['_value'].nameid,
-          name: this.DeletePostFrom.controls['photoName'].value,
-        };
+        let pp:string = this.DeletePostFrom.controls['publicId'].value;
+        if (pp.length > 0) {
 
-        this.sub4 = this.http.Post(User.UnSavePhoto, photo).subscribe((res) => {
-          // console.log(res);
-        });
+          this.sub4 = this.http.Post(`${User.UnSavePhoto}/${pp}`).subscribe((res) => {
+            // console.log(res);
+          });
+        }
+
       });
   }
 
   private stopAddunusablePhoto() {
-    if (this.fileName.length > 0) {
-      let photo = {
-        userId: this.auth.user['_value'].nameid,
-        name: this.fileName,
-      };
-      this.sub5 = this.http.Post(User.UnSavePhoto, photo).subscribe((res) => {
+    if (this.publicId.length > 0) {
+
+      this.sub5 = this.http.Post(`${User.UnSavePhoto}/${this.publicId}`).subscribe((res) => {
         // console.log(res);
       });
     }

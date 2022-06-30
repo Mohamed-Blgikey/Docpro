@@ -15,7 +15,6 @@ export class AcceptedreservationComponent implements OnInit,OnDestroy {
 
   sub1:Subscription|undefined;
   sub2:Subscription|undefined;
-  imgPrefix:string = environment.PhotoUrl;
   AcceptedReservations:reservation [] = [];
   constructor(private http:HttpService,private notify:NotifyService) { }
   ngOnDestroy(): void {

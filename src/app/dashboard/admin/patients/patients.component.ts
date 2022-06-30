@@ -21,7 +21,6 @@ export class PatientsComponent implements OnInit ,OnDestroy{
   private sub3:Subscription|undefined;
 
   patients:any;
-  imgPrefix:string = environment.PhotoUrl;
 
 
   DeleteUserForm:FormGroup = new FormGroup({

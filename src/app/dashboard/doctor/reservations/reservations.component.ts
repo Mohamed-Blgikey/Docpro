@@ -20,7 +20,6 @@ export class ReservationsComponent implements OnInit,OnDestroy {
   sub4:Subscription|undefined;
   sub5:Subscription|undefined;
   sub6:Subscription|undefined;
-  imgPrefix:string = environment.PhotoUrl;
   Reservations:reservation[] = [];
   constructor(private http:HttpService,private notify:NotifyService,private toast:HotToastService) { }
   ngOnDestroy(): void {

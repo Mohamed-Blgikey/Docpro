@@ -30,7 +30,6 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
   doctors:any;
   freeDoctors:any;
   sections:any;
-  imgPrefix : string = environment.PhotoUrl;
 
   DeleteUserF:FormGroup = new FormGroup({
     id: new FormControl('',[Validators.required]),
@@ -70,6 +69,13 @@ export class DoctorsComponent implements OnInit ,OnDestroy{
         this.sections = res.data;
       });
     });
+
+    this.notify.hubConnection.on("EditUser",()=>{
+      this.sub1 = this.http.Get(Admin.GetSection).subscribe(res=>{
+        // console.log(res.data);
+        this.sections = res.data;
+      })
+    })
 
 
 

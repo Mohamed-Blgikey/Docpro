@@ -11,6 +11,7 @@ import { NotifyService } from '../core/services/notify.service';
 import { HttpService } from '../core/services/http.service';
 import { Patient } from '../core/APIS/Patient';
 import { Subscription } from 'rxjs';
+import { User } from '../core/APIS/User';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -20,7 +21,6 @@ export class DashboardComponent implements OnInit,OnDestroy {
 
   user:user|any;
   error:string = '';
-  imgPrefix:string = environment.PhotoUrl;
 
   EditUserInfo:FormGroup = new FormGroup({
       id: new FormControl('',[Validators.required]),
@@ -94,22 +94,19 @@ export class DashboardComponent implements OnInit,OnDestroy {
   }
 
   EditUserImage(e:any){
-    if (this.user.photoName != "defualt.png") {
-      let photo = {
-        userId: this.user.id,
-        name:this.user.photoName
-      }
+    if (this.user.publicId != null) {
       setTimeout(() => {
-        this.userService.UnSavePhoto(photo).subscribe(res=>{
+        this.http.Post(`${User.UnSavePhoto}/${this.user.publicId}`).subscribe((res) => {
           // console.log(res);
-        })
+        });
       }, 2000);
     }
     var file=e.target.files[0];
     const formData:FormData=new FormData();
-    formData.append('photo',file);
-    this.userService.editUserImg(formData).subscribe(res=>{
-      // console.log(res);
+    formData.append('File',file);
+    formData.append('UserId',this.user.id);
+    this.http.Post(User.SavePhoto, formData).subscribe(res=>{
+      console.log(res);
       // this.user = res.data
     })
 

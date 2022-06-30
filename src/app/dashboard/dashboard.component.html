@@ -17,7 +17,7 @@
           width="30"
           height="30"
           class="rounded-circle"
-          [src]="imgPrefix + user.photoName"
+          [src]=" user.photoName"
         />
         <span class="px-2">{{ user.fullName }}</span>
         <mat-icon>expand_more</mat-icon>
@@ -55,7 +55,7 @@
             class="rounded-circle"
             width="200px"
             height="200px"
-            [src]="imgPrefix + user.photoName"
+            [src]=" user.photoName"
             [alt]="user.fullName"
           />
         </div>

@@ -10,7 +10,7 @@
           <mat-card-subtitle>
            {{request?.['degree']}}
           </mat-card-subtitle>
-          <img mat-card-lg-image [src]="imgPrefix+request['patient']?.['photoName']" >
+          <img style="border-radius: 50%;" mat-card-lg-image [src]="request['patient']?.['photoName']" >
         </mat-card-title-group>
         <mat-card-content style="word-wrap: break-word;">
           {{request?.['descraption']}}

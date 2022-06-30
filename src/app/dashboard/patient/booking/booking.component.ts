@@ -23,7 +23,6 @@ export class BookingComponent implements OnInit {
 
 
   sections:Section [] = [];
-  imgPrefix : string = environment.PhotoUrl;
 
   constructor(private http:HttpService,private toast:HotToastService,private notify:NotifyService,public dialog: MatDialog) { }
 
@@ -41,6 +40,13 @@ export class BookingComponent implements OnInit {
 
 
 
+
+    this.notify.hubConnection.on('EditUser', () => {
+      this.sub2 = this.http.Get(Patient.GetSections).subscribe((res) => {
+        // console.log(res.data) ;
+        this.sections = res.data;
+      });
+    });
 
     this.notify.hubConnection.on('AddSection', () => {
       this.sub2 = this.http.Get(Patient.GetSections).subscribe((res) => {

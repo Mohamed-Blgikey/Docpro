@@ -8,4 +8,5 @@ export interface post {
   doctorId: string;
   doctor: user;
   photoName: string;
+  publicId:string;
 }

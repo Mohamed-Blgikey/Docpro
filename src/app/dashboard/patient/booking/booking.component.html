@@ -5,7 +5,7 @@
   <div class="section" *ngFor="let section of sections">
     <h3>
       <img
-        [src]="imgPrefix + section.photoName"
+        [src]=" section.photoName"
         style="border-radius: 50%"
         width="30px"
         height="30px"
@@ -28,7 +28,7 @@
           style="overflow: hidden; height: 250px"
         >
           <img
-            [src]="imgPrefix + doctor.photoName"
+            [src]=" doctor.photoName"
             class="w-100 h-100"
             [alt]="doctor.fullName"
           />

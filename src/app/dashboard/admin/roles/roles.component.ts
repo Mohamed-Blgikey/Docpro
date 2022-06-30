@@ -33,7 +33,6 @@ export class RolesComponent implements OnInit ,OnDestroy{
     roleName: new FormControl('',[Validators.required])
   })
 
-  imgPrefix : string = environment.PhotoUrl;
 
   constructor(private http:HttpService,private notify:NotifyService,private toast:HotToastService) { }
 

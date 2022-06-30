@@ -16,10 +16,12 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./section.component.scss'],
 })
 export class SectionComponent implements OnInit, OnDestroy {
-  imgPrefix = environment.PhotoUrl;
+
   file: any;
-  fileName: string = '';
+  publicId:string = '';
+  fileName: string  = '';
   fileNameEdit: string = '';
+  publicIdEdit: string = '';
 
   sub: Subscription | undefined;
   sub1: Subscription | undefined;
@@ -35,12 +37,14 @@ export class SectionComponent implements OnInit, OnDestroy {
   AddSectionForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
     photoName: new FormControl('', [Validators.required]),
+    publicId:new FormControl('',[Validators.required])
   });
 
   DeleteAndEditSectionForm: FormGroup = new FormGroup({
     id: new FormControl(null, [Validators.required]),
     name: new FormControl('', [Validators.required]),
     photoName: new FormControl('', [Validators.required]),
+    publicId:new FormControl('',[Validators.required])
   });
   sections: any;
 
@@ -75,12 +79,19 @@ export class SectionComponent implements OnInit, OnDestroy {
     this.file = event.target.files[0];
     // console.log(this.file);
     const formData: FormData = new FormData();
-    formData.append('uploadedFile', this.file, this.file.name);
-    this.sub2 = this.http.Post(User.UplaodPhoto, formData).subscribe((res) => {
+    formData.append('File', this.file, this.file.name);
+     this.sub2 = this.http.Post(User.UplaodPhoto, formData).subscribe((res) => {
+      // console.log(res);
+
       this.fileName = res.message;
-      this.AddSectionForm.controls['photoName'].setValue(this.fileName);
-      this.DeleteAndEditSectionForm.controls['photoName'].setValue(
-        this.fileName
+      this.publicId = res.publicId;
+       this.AddSectionForm.controls['photoName'].setValue(this.fileName);
+       this.AddSectionForm.controls['publicId'].setValue(this.publicId);
+       this.DeleteAndEditSectionForm.controls['photoName'].setValue(
+         this.fileName
+       );
+       this.DeleteAndEditSectionForm.controls['publicId'].setValue(
+        this.publicId
       );
       //  console.log(this.AddSectionForm.value);
     });
@@ -100,6 +111,7 @@ export class SectionComponent implements OnInit, OnDestroy {
         // console.log(res);
         // this.AddSectionForm.reset();
         this.fileName = '';
+        this.publicId = '';
       });
   }
 
@@ -110,6 +122,7 @@ export class SectionComponent implements OnInit, OnDestroy {
       section.photoName
     );
     this.DeleteAndEditSectionForm.controls['name'].setValue(section.name);
+    this.DeleteAndEditSectionForm.controls['publicId'].setValue(section.publicId);
     // console.log(this.DeleteAndEditSectionForm.value);
   }
 
@@ -120,7 +133,9 @@ export class SectionComponent implements OnInit, OnDestroy {
       section.photoName
     );
     this.DeleteAndEditSectionForm.controls['name'].setValue(section.name);
+    this.DeleteAndEditSectionForm.controls['publicId'].setValue(section.publicId);
     this.fileNameEdit = section.photoName;
+    this.publicIdEdit = section.publicId;
     // console.log(this.DeleteAndEditSectionForm.value);
   }
 
@@ -135,15 +150,17 @@ export class SectionComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((res) => {
-        let photo = {
-          userId: this.auth.user['_value'].nameid,
-          name: this.fileNameEdit,
-        };
-        this.http.Post(User.UnSavePhoto, photo).subscribe((res) => {
-          // console.log(res);
-        });
-        this.fileName = '';
-        this.fileNameEdit = '';
+
+        if (this.publicIdEdit?.length > 0) {
+
+          this.http.Post(`${User.UnSavePhoto}/${this.publicIdEdit}`).subscribe((res) => {
+            // console.log(res);
+          });
+          this.fileName = '';
+          this.publicId = '';
+          this.publicIdEdit = '';
+          this.fileNameEdit = '';
+        }
       });
   }
 
@@ -163,15 +180,16 @@ export class SectionComponent implements OnInit, OnDestroy {
             })
           )
           .subscribe((res) => {
-            let photo = {
-              userId: this.auth.user['_value'].nameid,
-              name: this.DeleteAndEditSectionForm.controls['photoName'].value,
-            };
-            this.sub7 = this.http
-              .Post(User.UnSavePhoto, photo)
-              .subscribe((res) => {
-                // console.log(res);
-              });
+            // debugger;
+            let pp:string = this.DeleteAndEditSectionForm.controls['publicId'].value ;
+            if (pp.length >0 ) {
+
+              this.sub7 = this.http
+                .Post(`${User.UnSavePhoto}/${pp}`)
+                .subscribe((res) => {
+                  // console.log(res);
+                });
+            }
           });
       });
   }
@@ -191,22 +209,16 @@ export class SectionComponent implements OnInit, OnDestroy {
   }
 
   private stopAddunusablePhoto() {
-    if (this.fileName.length > 0) {
-      let photo = {
-        userId: this.auth.user['_value'].nameid,
-        name: this.fileName,
-      };
-      this.sub7 = this.http.Post(User.UnSavePhoto, photo).subscribe((res) => {
+    if (this.publicId?.length > 0) {
+
+      this.sub7 = this.http.Post(`${User.UnSavePhoto}/${this.publicId}`).subscribe((res) => {
         // console.log(res);
       });
     }
 
-    if (this.fileNameEdit.length > 0) {
-      let photo = {
-        userId: this.auth.user['_value'].nameid,
-        name: this.fileNameEdit,
-      };
-      this.sub9 = this.http.Post(User.UnSavePhoto, photo).subscribe((res) => {
+    if (this.publicIdEdit?.length > 0) {
+
+      this.sub9 = this.http.Post(`${User.UnSavePhoto}/${this.publicIdEdit}`).subscribe((res) => {
         // console.log(res);
       });
     }
